@@ -1,0 +1,70 @@
+@import url('https://fonts.googleapis.com/css2?family=Assistant:wght@300;400;600;700&family=Jost:wght@300;400;500;600;700&family=Karla:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Style+Script&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+@keyframes fadeOutScale {
+  0% {
+    opacity: 1;
+    transform: scale(1) translate(-50%, -50%);
+  }
+
+  30% {
+    opacity: 1;
+    transform: scale(1) translate(-50%, -50%);
+  }
+
+  50% {
+    opacity: 0.6;
+    transform: scale(1) translate(-50%, -50%);
+  }
+
+  80% {
+    opacity: 0.2;
+    transform: scale(1) translate(-50%, -50%);
+  }
+
+  100% {
+    opacity: 0;
+    transform: scale(1) translate(-50%, -50%);
+  }
+}
+
+/* swiper-pagination overrides */
+.swiper-pagination {
+  position: relative !important;
+  /* keeps it below image */
+  margin-top: 20px;
+  /* spacing from image */
+  display: flex !important;
+  justify-content: center;
+  gap: 0px;
+}
+
+.swiper-pagination-bullet {
+  width: 15px !important;
+  height: 7px !important;
+  border-radius: 50px !important;
+  background: #ccc !important;
+  /* override blue */
+  opacity: 1 !important;
+  /* make inactive bullets visible */
+  transition: all 0.3s ease !important;
+}
+
+.swiper-pagination-bullet-active {
+  width: 20px !important;
+  /* longer pill */
+  height: 7px !important;
+  border-radius: 50px !important;
+  background: #333 !important;
+  /* dark active one */
+}
