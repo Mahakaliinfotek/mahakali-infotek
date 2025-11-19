@@ -44,7 +44,7 @@ export default function CoreOfferings() {
             sx={{
                 width: "100%",
                 background: "#ffffff",
-                py: { xs: 6, md: 2 },
+                py: { xs: 6, md: 0 },
                 px: { xs: 3, md: 6 },
                 // borderRadius: "20px"
             }}
@@ -53,7 +53,7 @@ export default function CoreOfferings() {
             <Typography
                 sx={{
                     textAlign: "center",
-                    fontSize: { xs: "26px", md: "34px" },
+                    fontSize: { xs: "22px", md: "32px" },
                     fontWeight: 700,
                     mb: { xs: 4, md: 6 },
                     fontFamily: "Inter, sans-serif",

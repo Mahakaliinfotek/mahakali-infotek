@@ -20,6 +20,7 @@ import BusinessesSection from "../components/homepage/BusinessesSection";
 import HistorySection from "../components/homepage/HistorySection";
 import SustainabilitySection from "../components/homepage/SustainabilitySection";
 import MediaCSRSection from "../components/homepage/MediaCSRSection";
+import Footer from "../layouts/Footer";
 
 export default function HomePage() {
     return (
@@ -34,16 +35,17 @@ export default function HomePage() {
             {/* <WhatMakesUsDifferent /> */}
             <WhyTeamsChooseUs />
             <AchievementsTimeline />
-            <ClientsComponent />
+            {/* <ClientsComponent /> */}
             <TechnologiesWeWorkWith />
 
-             <PeopleCultureSlider />
+            <PeopleCultureSlider />
             <VisionSection />
             <BusinessesSection />
-            <HistorySection/>
+            <HistorySection />
             <SustainabilitySection />
             <MediaCSRSection />
             <CompanyStrip />
+            <Footer />
 
 
 

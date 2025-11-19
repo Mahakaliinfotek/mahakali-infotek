@@ -6,7 +6,7 @@ export default function TechnologiesWeWorkWith() {
         <Box
             sx={{
                 width: "100%",
-                py: { xs: 6, md: 8 },
+                py: { xs: 6, md: 4 },
                 px: { xs: 3, md: 6 },
                 background: "#fff",
             }}
@@ -14,7 +14,7 @@ export default function TechnologiesWeWorkWith() {
             {/* Section Title */}
             <Typography
                 sx={{
-                    fontSize: { xs: "26px", md: "34px" },
+                    fontSize: { xs: "22px", md: "32px" },
                     fontWeight: 700,
                     textAlign: "center",
                     mb: 3,

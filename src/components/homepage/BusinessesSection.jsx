@@ -75,7 +75,7 @@ export default function BusinessesSection() {
     ];
 
     return (
-        <Box sx={{ width: "100%", py: 6, px: { xs: 2, md: 4 } }}>
+        <Box id="businesses-section" sx={{ width: "100%", py: 6, px: { xs: 2, md: 4 } }} >
             {/* Header */}
             <Typography
                 sx={{
@@ -137,7 +137,7 @@ export default function BusinessesSection() {
                                 backgroundImage: `url(${item.bg})`,
                                 backgroundSize: "cover",
                                 backgroundPosition: "center",
-                               
+
                             }}
                         />
 

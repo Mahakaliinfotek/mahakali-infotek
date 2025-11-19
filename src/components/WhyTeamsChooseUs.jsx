@@ -54,7 +54,7 @@ export default function WhyTeamsChooseUs() {
             <Typography
                 sx={{
                     textAlign: "center",
-                    fontSize: { xs: "26px", md: "34px" },
+                    fontSize: { xs: "22px", md: "32px" },
                     fontWeight: 700,
                     mb: { xs: 4, md: 6 },
                     fontFamily: "Inter, sans-serif"

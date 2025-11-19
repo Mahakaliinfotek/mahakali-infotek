@@ -37,7 +37,7 @@ export default function AchievementsTimeline() {
             {/* TITLE */}
             <Typography
                 sx={{
-                    fontSize: { xs: "26px", md: "34px" },
+                    fontSize: { xs: "22px", md: "32px" },
                     fontWeight: 700,
                     mb: { xs: 4, md: 5 },
                     fontFamily: "Inter, sans-serif",
