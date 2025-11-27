@@ -28,24 +28,37 @@ export default function Header({ isDark = true }) {
     const navigate = useNavigate();
 
     const handleNavigate = (path) => {
-    if (path === "/businesses") {
-        if (window.location.pathname === "/") {
-            // Already on homepage → scroll only
-            document.getElementById("businesses-section")?.scrollIntoView({
-                behavior: "smooth",
-                block: "start",
-            });
-        } else {
-            // Navigate to homepage → then scroll after load
-            navigate("/", { state: { scrollTo: "businesses-section" } });
+        if (path === "/businesses") {
+            if (window.location.pathname === "/") {
+                // Already on homepage → scroll only
+                document.getElementById("businesses-section")?.scrollIntoView({
+                    behavior: "smooth",
+                    block: "start",
+                });
+            } else {
+                // Navigate to homepage → then scroll after load
+                navigate("/", { state: { scrollTo: "businesses-section" } });
+            }
+            return;
         }
-        return;
-    }
+        if (path === "/contact-us") {
+            if (window.location.pathname === "/") {
+                // Already on homepage → scroll only
+                document.getElementById("contact-section")?.scrollIntoView({
+                    behavior: "smooth",
+                    block: "start",
+                });
+            } else {
+                // Navigate to homepage → then scroll after load
+                navigate("/", { state: { scrollTo: "contact-section" } });
+            }
+            return;
+        }
 
-    // Default navigation
-    navigate(path);
-    setOpen(false);
-};
+        // Default navigation
+        navigate(path);
+        setOpen(false);
+    };
 
 
     // Dynamic color based on input prop
@@ -76,13 +89,13 @@ export default function Header({ isDark = true }) {
                     <Toolbar sx={{ justifyContent: "space-between" }}>
                         {/* Logo */}
                         <Box
-                          component="img"
-                          src={logo}
-                          sx={{
-                            width:"120px",
-                            cursor: "pointer"
-                          }}
-                          onClick={() => navigate("/")}
+                            component="img"
+                            src={logo}
+                            sx={{
+                                width: "120px",
+                                cursor: "pointer"
+                            }}
+                            onClick={() => navigate("/")}
                         />
 
                         {/* Desktop Menu */}
@@ -111,8 +124,9 @@ export default function Header({ isDark = true }) {
                             {/* CTA Button */}
                             <Button
                                 variant="contained"
-                                component="a"
-                                href={`mailto:info@mahakaliudyog.com`}
+                                // component="a"
+                                // href={`mailto:info@mahakaliudyog.com`}
+                                onClick={() => handleNavigate("/contact-us")}
                                 sx={{
                                     background: ctaBg,
                                     textTransform: "none",
@@ -175,7 +189,7 @@ export default function Header({ isDark = true }) {
 
                     {/* Contact Us Inside Drawer */}
                     <ListItemButton component="a"
-                                href={`mailto:info@mahakaliudyog.com`} sx={{ mt: 2 }}>
+                        href={`mailto:info@mahakaliudyog.com`} sx={{ mt: 2 }}>
                         <ListItemText
                             primary="Contact Us"
                             primaryTypographyProps={{

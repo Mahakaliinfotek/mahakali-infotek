@@ -18,7 +18,7 @@ import logo1 from "../../assets/images/business/mupl.png";
 import logo2 from "../../assets/images/business/oto.png";
 import logo3 from "../../assets/images/business/iz.png";
 import logo4 from "../../assets/images/business/mi.png";
-import logo5 from "../../assets/images/business/mi.png";
+import logo5 from "../../assets/images/business/minter.png";
 import logo6 from "../../assets/images/business/rse.png";
 import logo7 from "../../assets/images/business/me.png";
 import logo8 from "../../assets/images/business/kp.png";
@@ -31,51 +31,61 @@ export default function BusinessesSection() {
             logo: logo1,
             bg: img1,
             text: "Four decades of trusted coal and coke solutions since 1984.",
+            link: "https://www.mahakaliudyog.com/",
         },
         {
             logo: logo2,
             bg: img2,
             text: "End-to-end bulk logistics and stevedoring experts across India’s East Coast.",
+            link: "https://otovizag.com/",
         },
         {
             logo: logo3,
             bg: img3,
             text: "Where buyers discover more and sellers grow faster.",
+            link: "https://indiazona.in",
         },
         {
             logo: logo4,
             bg: img4,
             text: "Building reliable digital systems.",
+            link: "https://mahakaliinfotek.com/",
         },
         {
             logo: logo5,
             bg: img5,
             text: "Reliable coke supply with precise screening for steel industries.",
+            link: "https://mahakaliinternational.com/",
         },
         {
             logo: logo6,
             bg: img6,
             text: "Powering industries with reliable coal solutions since 2003.",
-        },
-        {
-            logo: logo7,
-            bg: img7,
-            text: "Turning land into productive and sustainable assets.",
-        },
-        {
-            logo: logo8,
-            bg: img8,
-            text: "Reliable coal supply from Indonesia with consistent quality.",
+            link: "https://ransanenterprises.com/",
         },
         {
             logo: logo9,
             bg: img9,
             text: "Reliable limestone and minerals supply from Oman.",
+            link: "https://munminmet.om/",
         },
+        {
+            logo: logo8,
+            bg: img8,
+            text: "Reliable coal supply from Indonesia with consistent quality.",
+            link: "https://krishnaresource.com/" ,
+        },
+        {
+            logo: logo7,
+            bg: img7,
+            text: "Turning land into productive and sustainable assets.",
+            link: "https://mahakaliestate.com/",
+        },
+        
     ];
 
     return (
-        <Box id="businesses-section" sx={{ width: "100%", py: 6, px: { xs: 2, md: 4 } }} >
+        <Box id="businesses-section"  sx={{ width: "100%", py: 6, px: { xs: 2, md: 4 } }} >
             {/* Header */}
             <Typography
                 sx={{
@@ -127,6 +137,7 @@ export default function BusinessesSection() {
                                 boxShadow: "0px 4px 12px rgba(0,0,0,0.25)",
                             },
                         }}
+                        onClick={() => window.open(item.link, "_blank")}
                     >
                         {/* Background Image */}
                         <Box
@@ -137,7 +148,7 @@ export default function BusinessesSection() {
                                 backgroundImage: `url(${item.bg})`,
                                 backgroundSize: "cover",
                                 backgroundPosition: "center",
-
+                               
                             }}
                         />
 
