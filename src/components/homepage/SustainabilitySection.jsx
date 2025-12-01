@@ -78,7 +78,7 @@ export default function SustainabilitySection() {
                                 cursor: "pointer",
                                 fontWeight: 500,
                             }}
-                            onClick={()=>navigate('/sustainability')}
+                            onClick={() => navigate('/sustainability')}
                         >
                             Click to Read More
                             <ArrowForwardIcon fontSize="small" />
@@ -95,7 +95,7 @@ export default function SustainabilitySection() {
                             // gap: 2,
                             justifyContent: "center",
                             alignItems: "center",
-                            
+
                         }}
                     >
                         <Box >
@@ -107,15 +107,19 @@ export default function SustainabilitySection() {
                                 src={imgMain}
                                 sx={{
                                     // gridRow: "1 / 3",
-                                    width:{ xs: "130px", sm:"200px", md: "300px"},
+                                    width: { xs: "130px", sm: "200px", md: "300px" },
                                     height: "100%",
                                     objectFit: "cover",
+                                    transition: "transform 0.3s ease",
+                                    "&:hover": {
+                                        transform: "scale(1.05)",
+                                    },
                                     // borderRadius: "18px",
                                 }}
                             />
                         </Box>
 
-                        <Box sx={{width:{xs:"150px",md:"100%"}}}>
+                        <Box sx={{ width: { xs: "150px", md: "100%" } }}>
 
 
                             {/* Small Image 1 */}
@@ -123,9 +127,13 @@ export default function SustainabilitySection() {
                                 component="img"
                                 src={imgSmall1}
                                 sx={{
-                                    width:{ xs: "130px", sm:"200px", md: "300px"},
+                                    width: { xs: "130px", sm: "200px", md: "300px" },
                                     height: "100%",
                                     objectFit: "cover",
+                                    transition: "transform 0.3s ease",
+                                    "&:hover": {
+                                        transform: "scale(1.05)",
+                                    },
                                 }}
 
                             />
@@ -135,9 +143,13 @@ export default function SustainabilitySection() {
                                 component="img"
                                 src={imgSmall2}
                                 sx={{
-                                    width:{ xs: "130px", sm:"200px", md: "300px"},
+                                    width: { xs: "130px", sm: "200px", md: "300px" },
                                     height: "100%",
                                     objectFit: "cover",
+                                    transition: "transform 0.3s ease",
+                                    "&:hover": {
+                                        transform: "scale(1.05)",
+                                    },
                                 }}
                             />
                         </Box>

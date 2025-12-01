@@ -47,7 +47,7 @@ export default function HomePage() {
             <MediaCSRSection />
             <CompanyStrip />
             <ContactUs />
-            <Footer />
+         
 
 
 

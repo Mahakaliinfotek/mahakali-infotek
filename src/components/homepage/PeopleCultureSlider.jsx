@@ -37,20 +37,20 @@ export default function PeopleCultureSlider() {
         },
     ];
 
-    const navigate=useNavigate()
+    const navigate = useNavigate()
 
     return (
         <Box>
 
-            <Box sx={{px:4.5,mt:4,mb:2}}>
+            <Box sx={{ px: 4.5, mt: 4, mb: 2 }}>
                 <Typography
                     sx={{
                         fontSize: { xs: 22, md: 28 },
                         fontWeight: 700,
                         // textAlign: "center",
-                        fontFamily:"IBM Plex Sans",
+                        fontFamily: "IBM Plex Sans",
                         mb: 1,
-                        color:"#005875"
+                        color: "#005875"
                     }}
                 >
                     Our People. Our Asset.
@@ -60,8 +60,8 @@ export default function PeopleCultureSlider() {
                         fontSize: { xs: 16, md: 18 },
                         // fontWeight: 700,
                         // textAlign: "center",
-                        fontFamily:"Inter",
-                    
+                        fontFamily: "Inter",
+
                         // color:"#005875"
                     }}
                 >
@@ -106,12 +106,14 @@ export default function PeopleCultureSlider() {
                             <Box
                                 sx={{
                                     position: "relative",
-                                    height: 300,
+                                    height: 340,
                                     // borderRadius: 2,
                                     overflow: "hidden",
                                     cursor: "pointer",
+                                    background: 'linear-gradient(0deg, rgba(0, 0, 0, 0.88) 0%, rgba(102, 102, 102, 0) 100%)'
+
                                 }}
-                                onClick={()=>navigate("/legacy-leadership")}
+                                onClick={() => navigate("/legacy-leadership")}
                             >
                                 {/* Background Image */}
                                 <Box
@@ -121,8 +123,24 @@ export default function PeopleCultureSlider() {
                                         width: "100%",
                                         height: "100%",
                                         objectFit: "cover",
+
                                     }}
                                 />
+                                {/* FULL IMAGE OVERLAY GRADIENT */}
+                                <Box
+                                    sx={{
+                                        position: "absolute",
+                                        top: 0,
+                                        left: 0,
+                                        width: "100%",
+                                        height: "100%",
+                                        background:
+                                            "linear-gradient(0deg, rgba(0, 0, 0, 0.88) 0%, rgba(102, 102, 102, 0) 100%)",
+                                        zIndex: 2,
+                                        pointerEvents: "none",
+                                    }}
+                                />
+
 
                                 {/* Overlay Gradient */}
                                 <Box
@@ -134,7 +152,12 @@ export default function PeopleCultureSlider() {
                                         p: 3,
                                         background:
                                             "linear-gradient(180deg, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.8) 100%)",
+                                        zIndex: 3,
                                         color: "#fff",
+                                        transition: "transform 0.3s ease",
+                                        "&:hover": {
+                                            transform: "scale(1.02)",
+                                        }
                                     }}
                                 >
                                     <Typography

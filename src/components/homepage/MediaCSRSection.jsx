@@ -10,7 +10,7 @@ export default function MediaCSRSection() {
         <Box
             sx={{
                 width: "100%",
-                minHeight: {xs:"300px",sm:"300px",md:"450px"},
+                minHeight: { xs: "300px", sm: "300px", md: "450px" },
                 backgroundImage: `url(${bgImage})`,
                 backgroundSize: "cover",
                 backgroundPosition: "center",
@@ -19,53 +19,69 @@ export default function MediaCSRSection() {
                 textAlign: "center",
                 color: "#fff",
                 position: "relative",
-                mb:"100px"
+                mb: "100px",
+
             }}
         >
-            {/* Header */}
-            <Typography
-                sx={{
-                    fontSize: { xs: 26, md: 32 },
-                    fontWeight: 700,
-                    mb: 1,
-                }}
-            >
-                Media & CSR
-            </Typography>
-
-            <Typography
-                sx={{
-                    fontSize: { xs: 15, md: 17 },
-                    mb: 3,
-                }}
-            >
-                Engaging audiences with purposeful communication that uplifts society.
-            </Typography>
-
-            {/* MAIN IMAGE BELOW SECTION – CENTERED */}
             <Box
                 sx={{
                     position: "absolute",
-                    bottom: "-80px",
-                    left: "50%",
-                    transform: "translateX(-50%)",
-                    width: { xs: "90%", sm: "70%", md: "55%" },
-                    borderRadius: 2,
-                    overflow: "hidden",
-                    // boxShadow: "0px 6px 20px rgba(0,0,0,0.35)",
-                    // background: "#000",
+                    inset: 0,
+                    background: 'linear-gradient(180deg, rgba(0, 0, 0, 0.78) 0%, rgba(102, 102, 102, 0) 100%)',
+                    zIndex: 1,
                 }}
-            >
-                {/* Main Image */}
+            />
+            <Box sx={{ position: "relative", zIndex: 2 }}>
+                {/* Header */}
+                <Typography
+                    sx={{
+                        fontSize: { xs: 26, md: 32 },
+                        fontWeight: 700,
+                        mb: 1,
+                    }}
+                >
+                    Media & CSR
+                </Typography>
+
+                <Typography
+                    sx={{
+                        fontSize: { xs: 15, md: 17 },
+                        mb: 3,
+                    }}
+                >
+                    Engaging audiences with purposeful communication that uplifts society.
+                </Typography>
+
+                {/* MAIN IMAGE BELOW SECTION – CENTERED */}
                 <Box
                     sx={{
-                        height: { xs: 220, md: 350 },
-                        width:"100%",
-                        objectFit: "contain",
+                        position: "absolute",
+                        top: { xs: "100%", md: "120%" },
+                        left: "50%",
+                        transform: "translateX(-50%)",
+                        width: { xs: "90%", sm: "70%", md: "55%" },
+                        borderRadius: 2,
+                        overflow: "hidden",
+
+                        // boxShadow: "0px 6px 20px rgba(0,0,0,0.35)",
+                        // background: "#000",
                     }}
-                    component="img"
-                    src={mediaImg}
                 >
+                    {/* Main Image */}
+                    <Box
+                        sx={{
+                            height: { xs: 220, md: 350 },
+                            width: "100%",
+                            objectFit: "contain",
+                            transition: "transform 0.3s ease",
+                            "&:hover": {
+                                transform: "scale(1.05)",
+                            },
+                        }}
+                        component="img"
+                        src={mediaImg}
+                    >
+                    </Box>
                 </Box>
             </Box>
         </Box>

@@ -30,25 +30,37 @@ export default function VisionSection() {
                 px: { xs: 2, md: 8 },
                 textAlign: "center",
                 color: "#fff",
-                mt:2
+                mt: 2
             }}
         >
-            {/* TOP TEXT */}
-            <Typography
+            {/* Overlay Layer */}
+            <Box
                 sx={{
-                    fontSize: { xs: 20, md: 28 },
-                    fontWeight: 600,
-                    maxWidth: 900,
-                    mx: "auto",
-                    lineHeight: 1.4,
-                    mb: 1,
+                    position: "absolute",
+                    inset: 0,
+                    background: "rgba(0,0,0,0.45)",      // solid transparent overlay
+                    // OR gradient overlay:
+                    // background: "linear-gradient(180deg, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.1) 100%)",
+                    zIndex: 1,
                 }}
-            >
-                To grow our <strong>multinational conglomerate</strong> into a global force in
-                commodities and services, synonymous with trust & commitment worldwide.
-            </Typography>
+            />
+            {/* TOP TEXT */}
+            <Box sx={{position:"relative",zIndex:2}}>
+                <Typography
+                    sx={{
+                        fontSize: { xs: 20, md: 28 },
+                        fontWeight: 500,
+                        maxWidth: 900,
+                        mx: "auto",
+                        lineHeight: 1.4,
+                        mb: 1,
+                    }}
+                >
+                    To grow our <strong>multinational conglomerate</strong> into a global force in
+                    commodities and services, synonymous with trust & commitment worldwide.
+                </Typography>
 
-            {/* <Typography
+                {/* <Typography
                 sx={{
                     fontSize: 16,
                     opacity: 0.9,
@@ -64,53 +76,59 @@ export default function VisionSection() {
                 <ArrowForwardIcon fontSize="small" />
             </Typography> */}
 
-            {/* THREE CARDS */}
-            <Box
-                sx={{
-                    mt: 2,
-                    display: "flex",
-                    justifyContent: "center",
-                    gap: { xs: 2, md: 4 },
-                    flexWrap: "wrap",
-                    // border:"2px solid red"
-                }}
-                
-            >
-                {cards.map((card, index) => (
-                    <Box
-                        key={index}
-                        sx={{
-                            width: { xs: "100%", sm: "80%", md: "30%" },
-                            background: "#00445B",
-                            padding: 6,
-                            borderRadius: "0px 70px 0px 70px",
-                            textAlign: "center",
-                            color: "#fff",
-                            boxShadow: "0px 6px 14px rgba(0,0,0,0.25)",
-                        }}
-                        
-                    >
-                        <Typography
-                            sx={{
-                                fontWeight: 700,
-                                fontSize: 20,
-                                mb: 1.5,
-                            }}
-                        >
-                            {card.title}
-                        </Typography>
+                {/* THREE CARDS */}
+                <Box
+                    sx={{
+                        mt: 2,
+                        display: "flex",
+                        justifyContent: "center",
+                        gap: { xs: 2, md: 4 },
+                        flexWrap: "wrap",
+                        // border:"2px solid red"
+                    }}
 
-                        <Typography
+                >
+                    {cards.map((card, index) => (
+                        <Box
+                            key={index}
                             sx={{
-                                fontSize: 15,
-                                opacity: 0.95,
-                                lineHeight: 1.5,
+                                width: { xs: "100%", sm: "80%", md: "30%" },
+                                background: "#00445B",
+                                padding: 6,
+                                borderRadius: "0px 70px 0px 70px",
+                                textAlign: "center",
+                                color: "#fff",
+                                boxShadow: "0px 6px 14px rgba(0,0,0,0.25)",
+                                transition: "transform 0.3s ease",
+                                "&:hover": {
+                                    transform: "scale(1.05)",
+                                    boxShadow: "0px 6px 14px rgba(0,0,0,0.35)",
+                                },
                             }}
+
                         >
-                            {card.text}
-                        </Typography>
-                    </Box>
-                ))}
+                            <Typography
+                                sx={{
+                                    fontWeight: 700,
+                                    fontSize: 20,
+                                    mb: 1.5,
+                                }}
+                            >
+                                {card.title}
+                            </Typography>
+
+                            <Typography
+                                sx={{
+                                    fontSize: 18,
+                                    opacity: 0.95,
+                                    lineHeight: 1.5,
+                                }}
+                            >
+                                {card.text}
+                            </Typography>
+                        </Box>
+                    ))}
+                </Box>
             </Box>
         </Box>
     );
