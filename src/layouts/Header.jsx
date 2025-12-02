@@ -88,7 +88,23 @@ export default function Header({ isDark = true }) {
                 >
                     <Toolbar sx={{ justifyContent: "space-between" }}>
                         {/* Logo */}
+
+
                         <Box
+                            onClick={() => navigate("/")}
+                            sx={{ display: "flex", background: "#fff", height: "50px", width: "120px", justifyContent: "center", alignItems: "center" }}>
+                            <Box
+                                component="img"
+                                src={logo}
+                                sx={{
+                                    height: "40px",
+                                    cursor: "pointer",
+
+                                }}
+
+                            />
+                        </Box>
+                        {/* <Box
                             component="img"
                             src={logo}
                             sx={{
@@ -96,7 +112,7 @@ export default function Header({ isDark = true }) {
                                 cursor: "pointer"
                             }}
                             onClick={() => navigate("/")}
-                        />
+                        /> */}
 
                         {/* Desktop Menu */}
                         <Box
