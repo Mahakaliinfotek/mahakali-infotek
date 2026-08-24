@@ -1,237 +1,4 @@
-// import {
-//     Box,
-//     Container,
-//     Typography,
-// } from "@mui/material";
 
-// import { motion } from "framer-motion";
-
-// const MotionTypography =
-//     motion.create(Typography);
-
-// const MotionBox =
-//     motion.create(Box);
-
-// const services = [
-//     "CUSTOM WEBSITES",
-//     "CUSTOM SOFTWARE",
-//     "AI AGENTS",
-//     "AUTOMATIONS",
-//     "INTEGRATIONS",
-//     "E-COMMERCE",
-//     "BUSINESS DEVELOPMENT",
-//     "STRATEGY",
-// ];
-
-// const serviceAnimation = {
-//     hidden: {
-//         opacity: 0,
-//         x: 120,
-//     },
-
-//     visible: {
-//         opacity: 1,
-//         x: 0,
-//     },
-// };
-
-// export default function ServicesSection({
-//     isActive = false,
-// }) {
-//     return (
-//         <Box
-//             component="section"
-//             sx={{
-//                 width: "100%",
-//                 minHeight: "100%",
-//                 color: "#fff",
-//             }}
-//         >
-//             <Container
-//                 maxWidth={false}
-//                 sx={{
-//                     maxWidth: "1440px",
-
-//                     px: {
-//                         xs: 3,
-//                         sm: 5,
-//                         md: 8,
-//                     },
-
-//                     pb: {
-//                         xs: 2,
-//                         md: 10,
-//                     },
-//                 }}
-//             >
-//                 {/* SERVICES LABEL */}
-
-//                 <Typography
-//                     sx={{
-//                         fontFamily:
-//                             '"Roboto Mono", monospace',
-
-//                         fontSize: {
-//                             xs: "12px",
-//                             md: "14px",
-//                         },
-
-//                         fontWeight: 400,
-
-//                         textTransform:
-//                             "uppercase",
-
-//                         mb: {
-//                             xs: 2,
-//                             md: 6,
-//                         },
-//                     }}
-//                 >
-//                     SERVICES:
-//                 </Typography>
-
-//                 {/* FULL SERVICES FADE WRAPPER */}
-
-//                 <MotionBox
-//                     initial={false}
-//                     animate={
-//                         isActive
-//                             ? {
-//                                 opacity: [
-//                                     1,
-//                                     1,
-//                                     0.35,
-//                                     1,
-//                                 ],
-//                             }
-//                             : {
-//                                 opacity: 1,
-//                             }
-//                     }
-//                     transition={
-//                         isActive
-//                             ? {
-//                                 delay: 3.7,
-
-//                                 duration: 3,
-
-//                                 times: [
-//                                     0,
-//                                     0.25,
-//                                     0.65,
-//                                     1,
-//                                 ],
-
-//                                 repeat: Infinity,
-
-//                                 repeatType:
-//                                     "loop",
-
-//                                 ease:
-//                                     "easeInOut",
-//                             }
-//                             : {
-//                                 duration: 0,
-//                             }
-//                     }
-//                     sx={{
-//                         width: "100%",
-//                     }}
-//                 >
-//                     <Box
-//                         sx={{
-//                             display: "flex",
-
-//                             flexDirection:
-//                                 "column",
-
-//                             alignItems:
-//                                 "flex-end",
-
-//                             gap: {
-//                                 xs: 3.5,
-//                                 sm: 3,
-//                                 md: 3.5,
-//                             },
-//                         }}
-//                     >
-//                         {services.map(
-//                             (
-//                                 service,
-//                                 index
-//                             ) => (
-//                                 <MotionTypography
-//                                     key={
-//                                         service
-//                                     }
-
-//                                     initial="hidden"
-
-//                                     animate={
-//                                         isActive
-//                                             ? "visible"
-//                                             : "hidden"
-//                                     }
-
-//                                     variants={
-//                                         serviceAnimation
-//                                     }
-
-//                                     transition={{
-//                                         duration:
-//                                             0.9,
-
-//                                         delay:
-//                                             isActive
-//                                                 ? 0.2 +
-//                                                 index *
-//                                                 0.35
-//                                                 : 0,
-
-//                                         ease: [
-//                                             0.22,
-//                                             1,
-//                                             0.36,
-//                                             1,
-//                                         ],
-//                                     }}
-
-//                                     sx={{
-//                                         width:
-//                                             "100%",
-
-//                                         fontFamily:
-//                                             '"Anton", sans-serif',
-
-//                                         fontSize: {
-//                                             xs: "27px",
-//                                             sm: "34px",
-//                                             md: "42px",
-//                                         },
-
-//                                         fontWeight:
-//                                             400,
-
-//                                         lineHeight:
-//                                             1,
-
-//                                         textTransform:
-//                                             "uppercase",
-
-//                                         textAlign:
-//                                             "right",
-//                                     }}
-//                                 >
-//                                     {service}
-//                                 </MotionTypography>
-//                             )
-//                         )}
-//                     </Box>
-//                 </MotionBox>
-//             </Container>
-//         </Box>
-//     );
-// }
 
 
 import {
@@ -512,7 +279,7 @@ export default function ServicesSection({
 
                 width: "100%",
 
-                // FIXED SCREEN HEIGHT
+
                 height: {
                     xs: "auto",
                     md: "100svh",
@@ -602,7 +369,7 @@ export default function ServicesSection({
                         SERVICES:
                     </Typography>
 
-                    
+
 
                     <Box
                         sx={{
@@ -701,9 +468,9 @@ export default function ServicesSection({
                         }}
                     />
 
-                    
 
-                    {services.map((service) => (
+
+                    {services.map((service, index) => (
                         <Box
                             key={service.title}
                             onMouseEnter={() => setActiveService(service)}
@@ -726,7 +493,41 @@ export default function ServicesSection({
                                 cursor: "pointer",
                             }}
                         >
-                            <Typography
+                            <MotionTypography
+                                key={
+                                    service
+                                }
+
+                                initial="hidden"
+
+                                animate={
+                                    isActive
+                                        ? "visible"
+                                        : "hidden"
+                                }
+
+                                variants={
+                                    serviceAnimation
+                                }
+
+                                transition={{
+                                    duration:
+                                        0.9,
+
+                                    delay:
+                                        isActive
+                                            ? 0.2 +
+                                            index *
+                                            0.35
+                                            : 0,
+
+                                    ease: [
+                                        0.22,
+                                        1,
+                                        0.36,
+                                        1,
+                                    ],
+                                }}
                                 sx={{
                                     fontFamily:
                                         '"Anton", "Arial Narrow", sans-serif',
@@ -763,7 +564,7 @@ export default function ServicesSection({
                                 }}
                             >
                                 {service.title}
-                            </Typography>
+                            </MotionTypography>
                         </Box>
                     ))}
 

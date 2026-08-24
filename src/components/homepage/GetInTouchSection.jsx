@@ -106,7 +106,7 @@ export default function GetInTouchSection() {
                     },
 
                     pb: {
-                        xs: 3,
+                        xs: 2,
                         sm: 8,
                         md: 9,
                     },
@@ -161,7 +161,7 @@ export default function GetInTouchSection() {
                 <Box
                     sx={{
                         mt: {
-                            xs: 4,
+                            xs: 3,
                             sm: 5,
                         },
 
@@ -410,7 +410,7 @@ export default function GetInTouchSection() {
                     },
 
                     pt: {
-                        xs: 3.8,
+                        xs: .8,
                         sm: 5,
                     },
 

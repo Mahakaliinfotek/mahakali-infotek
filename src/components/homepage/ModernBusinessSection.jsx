@@ -368,6 +368,10 @@ export default function ModernBusinessSection() {
                         initial={{
                             opacity: 0,
                             x: -80,
+
+
+
+
                         }}
                         animate={{
                             opacity: 1,
@@ -618,7 +622,10 @@ export default function ModernBusinessSection() {
                     <MotionTypography
                         initial={{
                             opacity: 0,
-                            x: -70,
+                            // x: -70,
+                            //x: "-100vw",
+                            x: -120,
+
                         }}
                         animate={{
                             opacity: 1,
@@ -657,7 +664,7 @@ export default function ModernBusinessSection() {
                     <MotionTypography
                         initial={{
                             opacity: 0,
-                            x: -70,
+                            x: -120,
                         }}
                         animate={{
                             opacity: 1,
@@ -737,7 +744,7 @@ export default function ModernBusinessSection() {
                 <MotionTypography
                     initial={{
                         opacity: 0,
-                        x: -60,
+                        x: -120,
                     }}
                     animate={{
                         opacity: 1,

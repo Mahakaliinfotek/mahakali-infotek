@@ -358,7 +358,7 @@ const mobileMenuItems = [
     },
     {
         label: "PEOPLE",
-        path: "/legacy-leadership",
+        path: "https://themahakaligroup.com/legacy-leadership",
     },
 ];
 
@@ -526,7 +526,7 @@ export default function HeaderV2() {
                         label="PEOPLE"
                         onClick={() =>
                             navigate(
-                                "/legacy-leadership"
+                                "https://themahakaligroup.com/legacy-leadership"
                             )
                         }
                     />
@@ -615,11 +615,13 @@ export default function HeaderV2() {
                     />
 
                     <Button
-                        onClick={() =>
-                            navigateToSection(
-                                "contact-us"
-                            )
-                        }
+                        // onClick={() =>
+                        //     navigateToSection(
+                        //         "contact-us"
+                        //     )
+                        // }
+
+                        onClick={() => navigateToSection("contact-us")}
                         disableElevation
                         endIcon={
                             <AddRoundedIcon
@@ -727,8 +729,11 @@ export default function HeaderV2() {
 
                         pb: 2.25,
 
-                        bgcolor:
-                            "#FFFFFF",
+                        // bgcolor:
+                        //     "#FFFFFF",
+
+                        background:
+                            "linear-gradient(90deg, #000 0%,  #002219 100%)",
 
                         color:
                             "#1D1B20",
@@ -799,7 +804,7 @@ export default function HeaderV2() {
                         aria-label="Close navigation menu"
                         sx={{
                             color:
-                                "#0647FF",
+                                "#006A4E",
 
                             p: 0.25,
 
@@ -855,7 +860,7 @@ export default function HeaderV2() {
                                                 "16px !important",
 
                                             color:
-                                                "#0647FF",
+                                                "#006A4E",
                                         }}
                                     />
                                 }
@@ -938,7 +943,7 @@ export default function HeaderV2() {
                             "999px",
 
                         bgcolor:
-                            "#0647FF",
+                            "#006A4E",
 
                         color:
                             "#FFFFFF",

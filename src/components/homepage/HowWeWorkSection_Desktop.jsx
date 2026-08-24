@@ -28,12 +28,14 @@ const steps = [
         title: "DISCOVER",
         description:
             "WE UNDERSTAND YOUR VISION, OBJECTIVES, CHALLENGES AND REQUIREMENTS THROUGH DETAILED DISCOVERY CONVERSATIONS AND THE RIGHT QUESTIONS.",
-    },
+   
+        },
     {
         title: "SCOPE & PLAN",
         description:
             "WE DEFINE THE REQUIREMENTS, APPROACH, DELIVERABLES AND RESOURCES IN DETAIL, FORMING THE BASIS FOR CLEAR COMMERCIALS AND COMMITTED TIMELINES.",
-    },
+   
+        },
     {
         title: "EXECUTE",
         description:
