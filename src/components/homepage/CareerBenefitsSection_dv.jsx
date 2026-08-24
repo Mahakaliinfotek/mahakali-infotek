@@ -3,11 +3,11 @@ import { useEffect, useRef, useState } from "react";
 import { Box, Container, Typography, useMediaQuery } from "@mui/material";
 import { motion } from "framer-motion";
 
-import UnifiedApproach from "../../assets/home/UnifiedApproach.png";
-import CommittedTimelines from "../../assets/home/CommittedTimelines.png";
-import FullTransparency from "../../assets/home/FullTransparency.png";
-import FutureReady from "../../assets/home/FutureReady.png";
-import SpecialistTeam from "../../assets/home/SpecialistTeam.png";
+import UnifiedApproach from "../../assets/home/UnifiedApproach.webp";
+import CommittedTimelines from "../../assets/home/CommittedTimelines.webp";
+import FullTransparency from "../../assets/home/FullTransparency.webp";
+import FutureReady from "../../assets/home/FutureReady.webp";
+import SpecialistTeam from "../../assets/home/SpecialistTeam.webp";
 
 import UnifiedApproach_dv from "../../assets/home/UnifiedApproach_dv.webp";
 import CommittedTimelines_dv from "../../assets/home/CommittedTimelines_dv.webp";
@@ -318,7 +318,7 @@ export default function CareerBenefitsSectionDesktop() {
                 position: "relative",
                 width: "100%",
 
-               
+
                 height: {
                     xs: "100%",
                     md: "auto",
@@ -328,14 +328,14 @@ export default function CareerBenefitsSectionDesktop() {
                     md: "100svh",
                 },
 
-               
+
                 overflow: {
                     xs: "hidden",
                     md: "visible",
                 },
             }}
         >
-            
+
             <Container
                 maxWidth={false}
                 sx={{
