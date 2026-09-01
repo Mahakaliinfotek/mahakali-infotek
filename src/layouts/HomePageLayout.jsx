@@ -3,6 +3,8 @@ import { Box } from "@mui/material";
 
 import { Outlet } from "react-router-dom";
 import Footer from "../components/common/Footer";
+import HeaderV2 from "./HeaderV2";
+import FooterV2 from "./FooterV2";
 
 
 export const HomePageLayout = () => {
@@ -25,13 +27,13 @@ export const HomePageLayout = () => {
                     width: "100%",
                     maxWidth: "1600px",
                     mx: "auto",
-                    // px: { xs: "12px", sm: "16px", md: "20px" },
+
                     py: { xs: 0, sm: "16px", md: 0 },
                 }}
             >
-                {/* <Header /> */}
+                <HeaderV2 />
                 <Outlet />
-                <Footer />
+                {/* <FooterV2 /> */}
             </Box>
 
             {/* Footer – uncomment if needed */}

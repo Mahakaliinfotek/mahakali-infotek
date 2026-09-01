@@ -7,6 +7,9 @@ import LegacyLeadershipPage from './LegacyLeadershipPage'
 import { Sustainability } from './Sustainability'
 import Story from './pages/Story/Story'
 import { HomePageLayout } from './layouts/HomePageLayout'
+import HomeV1 from './pages/Homev1'
+import SendQuerySection from './components/homepage/SendQuerySection'
+import PrivacyPolicyPage from './pages/PrivacyPolicyPage'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -17,9 +20,13 @@ function App() {
         <Route path="/story" element={<Story />} />
         <Route path="/about-us" element={<Story />} />
         <Route path="/" element={<HomePageLayout />}>
-          <Route path="/" element={<HomePage />} />
+          <Route path="/" element={<HomeV1 />} />
           <Route path="/legacy-leadership" element={<LegacyLeadershipPage />} />
           <Route path="/sustainability" element={<Sustainability />} />
+          <Route path="/send-quer" element={<SendQuerySection />} />
+          <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
+
+
 
         </Route>
 
