@@ -274,6 +274,7 @@ export default function ServicesSection({
     ) : (
         <Box
             component="section"
+            id="services"
             sx={{
                 position: "relative",
 
@@ -301,7 +302,7 @@ export default function ServicesSection({
 
                     width: "100%",
                     height: "100%",
-                    mt: 20,
+
 
                     px: {
                         xs: 2.5,
@@ -331,6 +332,7 @@ export default function ServicesSection({
 
                 <Box
                     sx={{
+                        mt: 20,
                         height: {
                             xs: "auto",
                             md: "100svh",
@@ -419,10 +421,7 @@ export default function ServicesSection({
                         />
                     </Box>
                 </Box>
-
-
-
-                <Box
+                {/* <Box
                     sx={{
                         position: "relative",
 
@@ -430,7 +429,7 @@ export default function ServicesSection({
                             xs: "auto",
 
 
-                            md: "80svh",
+                            // md: "100svh",
                         },
 
                         overflowY: {
@@ -457,110 +456,259 @@ export default function ServicesSection({
                             display: "none",
                         },
                     }}
-                >
-                    {/* top spacing */}
-                    <Box
+                > */}
+                {/* top spacing */}
+                {/* <Box
                         sx={{
                             height: {
-                                md: "100px",
+                                md: "40px",
 
                             },
                         }}
+                    /> */}
+
+
+                {/* 
+                    {services.map((service, index) => (
+                        // <Box
+                        //     key={service.title}
+                        //     onMouseEnter={() => setActiveService(service)}
+                        //     sx={{
+                        //         height: {
+                        //             xs: "100px",
+                        //             // md: "120px",
+                        //         },
+
+                        //         flexShrink: 0,
+
+                        //         display: "flex",
+                        //         alignItems: "center",
+
+                        //         justifyContent: {
+                        //             xs: "flex-start",
+                        //             md: "flex-end",
+                        //         },
+
+                        //         cursor: "pointer",
+                        //     }}
+                        // >
+                        //     <MotionTypography
+                        //         key={
+                        //             service
+                        //         }
+
+                        //         // initial="hidden"
+
+                        //         // animate={
+                        //         //     isActive
+                        //         //         ? "visible"
+                        //         //         : "visible"
+                        //         // }
+
+                        //         // variants={
+                        //         //     serviceAnimation
+                        //         // }
+
+                        //         // transition={{
+                        //         //     duration:
+                        //         //         0.9,
+
+                        //         //     delay:
+                        //         //         isActive
+                        //         //             ? 0.2 +
+                        //         //             index *
+                        //         //             0.35
+                        //         //             : 0,
+
+                        //         //     ease: [
+                        //         //         0.22,
+                        //         //         1,
+                        //         //         0.36,
+                        //         //         1,
+                        //         //     ],
+                        //         // }}
+
+                        //         initial={{
+                        //             opacity: 0,
+                        //             x: 180,
+                        //         }}
+
+                        //         whileInView={{
+                        //             opacity: 1,
+                        //             x: 0,
+                        //         }}
+
+                        //         viewport={{
+                        //             once: false,
+                        //             amount: 0.45,
+                        //         }}
+
+                        //         transition={{
+                        //             duration: 1.25,
+                        //             delay: 0.15 + index * 0.16,
+                        //             ease: [0.22, 1, 0.36, 1],
+                        //         }}
+
+
+
+
+                        //         sx={{
+                        //             fontFamily:
+                        //                 '"Anton", "Arial Narrow", sans-serif',
+
+                        //             fontSize: {
+                        //                 xs: "32px",
+                        //                 sm: "48px",
+                        //                 md: "56px",
+
+                        //             },
+
+                        //             lineHeight: .9,
+                        //             fontWeight: 400,
+
+                        //             textTransform: "uppercase",
+
+                        //             textAlign: {
+
+                        //                 md: "right",
+                        //             },
+
+                        //             transition:
+                        //                 "opacity 0.3s ease, transform 0.3s ease",
+
+                        //             // opacity:
+                        //             //     activeService.title === service.title
+                        //             //         ? 1
+                        //             //         : 0.65,
+
+                        //             transform:
+                        //                 activeService.title === service.title
+                        //                     ? "translateX(0)"
+                        //                     : "translateX(0)",
+                        //         }}
+                        //     >
+                        //         {service.title}
+                        //     </MotionTypography>
+                        // </Box>
+                    ))} */}
+
+                {/* bottom spacing */}
+                {/* <Box
+                        sx={{
+                            height: {
+                                md: "100px",
+                            },
+                        }}
+                    /> */}
+                {/* </Box> */}
+
+
+
+
+
+                {/* <MotionBox
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{
+                        once: false,
+                        amount: 0.2,
+                    }}
+                    variants={{
+                        hidden: {},
+                        visible: {
+                            transition: {
+                                staggerChildren: 0.12,
+                                delayChildren: 0.1,
+                            },
+                        },
+                    }}
+                    sx={{
+                        position: "relative",
+                        height: "100%",
+
+                        overflowY: "auto",
+                        overflowX: "hidden",
+
+                        pr: {
+                            md: 16,
+                        },
+
+                        scrollbarWidth: "none",
+
+                        "&::-webkit-scrollbar": {
+                            display: "none",
+                        },
+                    }}
+                >
+                    <Box
+                        sx={{
+                            height: "40px",
+                        }}
                     />
 
-
-
-                    {services.map((service, index) => (
+                    {services.map((service) => (
                         <Box
                             key={service.title}
-                            onMouseEnter={() => setActiveService(service)}
+                            onMouseEnter={() =>
+                                setActiveService(service)
+                            }
                             sx={{
-                                height: {
-                                    xs: "100px",
-                                    md: "120px",
-                                },
-
-                                flexShrink: 0,
+                                height: "100px",
 
                                 display: "flex",
                                 alignItems: "center",
 
-                                justifyContent: {
-                                    xs: "flex-start",
-                                    md: "flex-end",
-                                },
+                                justifyContent:
+                                    "flex-end",
 
                                 cursor: "pointer",
+
+                                overflow: "hidden",
                             }}
                         >
                             <MotionTypography
-                                key={
-                                    service
-                                }
+                                variants={{
+                                    hidden: {
+                                        opacity: 0,
+                                        x: 140,
+                                    },
 
-                                initial="hidden"
+                                    visible: {
+                                        opacity: 1,
+                                        x: 0,
 
-                                animate={
-                                    isActive
-                                        ? "visible"
-                                        : "hidden"
-                                }
-
-                                variants={
-                                    serviceAnimation
-                                }
-
-                                transition={{
-                                    duration:
-                                        0.9,
-
-                                    delay:
-                                        isActive
-                                            ? 0.2 +
-                                            index *
-                                            0.35
-                                            : 0,
-
-                                    ease: [
-                                        0.22,
-                                        1,
-                                        0.36,
-                                        1,
-                                    ],
+                                        transition: {
+                                            duration: 1.4,
+                                            ease: [
+                                                0.16,
+                                                1,
+                                                0.3,
+                                                1,
+                                            ],
+                                        },
+                                    },
                                 }}
                                 sx={{
                                     fontFamily:
                                         '"Anton", "Arial Narrow", sans-serif',
 
                                     fontSize: {
-                                        xs: "36px",
+                                        xs: "32px",
                                         sm: "48px",
-                                        md: "58px",
-                                        lg: "68px",
+                                        md: "54px",
                                     },
 
-                                    lineHeight: 1,
+                                    lineHeight: 0.9,
+
                                     fontWeight: 400,
 
-                                    textTransform: "uppercase",
+                                    textTransform:
+                                        "uppercase",
 
-                                    textAlign: {
-                                        xs: "left",
-                                        md: "right",
-                                    },
+                                    textAlign: "right",
 
-                                    transition:
-                                        "opacity 0.3s ease, transform 0.3s ease",
-
-                                    // opacity:
-                                    //     activeService.title === service.title
-                                    //         ? 1
-                                    //         : 0.65,
-
-                                    transform:
-                                        activeService.title === service.title
-                                            ? "translateX(0)"
-                                            : "translateX(0)",
+                                    willChange:
+                                        "transform, opacity",
                                 }}
                             >
                                 {service.title}
@@ -568,15 +716,220 @@ export default function ServicesSection({
                         </Box>
                     ))}
 
-                    {/* bottom spacing */}
                     <Box
                         sx={{
-                            height: {
-                                md: "100px",
-                            },
+                            height: "100px",
                         }}
                     />
-                </Box>
+                </MotionBox> */}
+
+                <MotionBox
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{
+                        once: false,
+                        amount: 0.2,
+                    }}
+                    variants={{
+                        hidden: {},
+                        visible: {
+                            transition: {
+                                // First heading starts after 0.5 sec
+                                delayChildren: 0.5,
+
+                                // Each next heading comes after 4 seconds
+                                staggerChildren: .7,
+                            },
+                        },
+                    }}
+                    sx={{
+                        position: "relative",
+                        height: "100%",
+
+                        overflowY: "auto",
+                        overflowX: "hidden",
+
+                        pr: {
+                            md: 16,
+                        },
+
+                        scrollbarWidth: "none",
+
+                        "&::-webkit-scrollbar": {
+                            display: "none",
+                        },
+                    }}
+                >
+                    <Box
+                        sx={{
+                            height: "40px",
+                        }}
+                    />
+
+                    {/* {services.map((service) => (
+                        <Box
+                            key={service.title}
+                            onMouseEnter={() =>
+                                setActiveService(service)
+                            }
+                            sx={{
+                                height: "100px",
+
+                                display: "flex",
+                                alignItems: "center",
+
+                                justifyContent: "flex-end",
+
+                                cursor: "pointer",
+
+                                overflow: "hidden",
+                               
+                            }}
+                        >
+                            <MotionTypography
+                                className="service-title"
+                                 key={service.title}
+                            onMouseEnter={() =>
+                                setActiveService(service)
+                            }
+                                variants={{
+                                    hidden: {
+                                        opacity: 0,
+                                        x: 140,
+                                    },
+
+                                    visible: {
+                                        opacity: 1,
+                                        x: 0,
+
+                                        transition: {
+                                            duration: 1.4,
+
+                                            ease: [
+                                                0.16,
+                                                1,
+                                                0.3,
+                                                1,
+                                            ],
+                                        },
+                                    },
+                                }}
+                                sx={{
+                                    fontFamily:
+                                        '"Anton", "Arial Narrow", sans-serif',
+
+                                    fontSize: {
+                                        xs: "32px",
+                                        sm: "48px",
+                                        md: "54px",
+                                    },
+
+                                    lineHeight: 0.9,
+
+                                    fontWeight: 400,
+
+                                    textTransform:
+                                        "uppercase",
+
+                                    textAlign: "right",
+
+                                    willChange:
+                                        "transform, opacity",
+
+                                         "&:hover .service-title": {
+                                    color: "#00A878",
+                                },
+                                }}
+                            >
+                                {service.title}
+                            </MotionTypography>
+                        </Box>
+                    ))} */}
+
+                    {services.map((service) => (
+                        <Box
+                            key={service.title}
+                            onMouseEnter={() =>
+                                setActiveService(service)
+                            }
+                            sx={{
+                                height: "100px",
+
+                                display: "flex",
+                                alignItems: "center",
+
+                                justifyContent: "flex-end",
+
+                                cursor: "pointer",
+
+                                overflow: "hidden",
+                            }}
+                        >
+                            <MotionTypography
+                                variants={{
+                                    hidden: {
+                                        opacity: 0,
+                                        x: 140,
+                                    },
+
+                                    visible: {
+                                        opacity: 1,
+                                        x: 0,
+
+                                        transition: {
+                                            duration: 1.4,
+
+                                            ease: [
+                                                0.16,
+                                                1,
+                                                0.3,
+                                                1,
+                                            ],
+                                        },
+                                    },
+                                }}
+                                sx={{
+                                    fontFamily:
+                                        '"Anton", "Arial Narrow", sans-serif',
+
+                                    fontSize: {
+                                        xs: "32px",
+                                        sm: "48px",
+                                        md: "54px",
+                                    },
+
+                                    lineHeight: 0.9,
+
+                                    fontWeight: 400,
+
+                                    textTransform: "uppercase",
+
+                                    textAlign: "right",
+
+                                    color: "#fff",
+
+                                    transition:
+                                        "color 0.3s ease",
+
+                                    "&:hover": {
+                                        color: "#00A878",
+                                    },
+
+                                    willChange:
+                                        "transform, opacity",
+                                }}
+                            >
+                                {service.title}
+                            </MotionTypography>
+                        </Box>
+                    ))}
+
+                    <Box
+                        sx={{
+                            height: "100px",
+                        }}
+                    />
+                </MotionBox>
             </Container>
         </Box>
     );

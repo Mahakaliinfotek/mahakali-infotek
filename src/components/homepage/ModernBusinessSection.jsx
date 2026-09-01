@@ -566,7 +566,6 @@ export default function ModernBusinessSection() {
                             background: {
                                 xs:
                                     "linear-gradient(180deg, rgba(0,0,0,0.12) 0%, rgba(0,0,0,0.5) 100%)",
-
                                 md:
                                     "linear-gradient(90deg, rgba(0,0,0,0.68) 0%, rgba(0,0,0,0.28) 48%, rgba(0,0,0,0.06) 100%)",
 

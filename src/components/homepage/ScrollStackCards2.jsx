@@ -1,3 +1,5 @@
+
+
 // import { useRef } from "react";
 // import Box from "@mui/material/Box";
 
@@ -33,19 +35,6 @@
 //         sm: "70vh",
 //         md: "70vh",
 //     },
-
-//     /*
-//      * Gives final cards enough runway
-//      * to reach the sticky position.
-//      *
-//      * It DOES NOT appear as blank space
-//      * because final card remains sticky.
-//      */
-//     endHoldHeight = {
-//         xs: "85vh",
-//         sm: "70vh",
-//         md: "65vh",
-//     },
 // }) {
 //     const containerRef = useRef(null);
 
@@ -70,9 +59,17 @@
 //             sx={{
 //                 position: "relative",
 //                 width: "100%",
+
+//                 // IMPORTANT:
+//                 // no fake bottom runway
+//                 pb: 0,
+//                 mb: 0,
 //             }}
 //         >
 //             {items.map((item, index) => {
+//                 const isLast =
+//                     index === items.length - 1;
+
 //                 const targetScale = Math.max(
 //                     0.85,
 //                     1 -
@@ -90,6 +87,7 @@
 //                             }-${index}`}
 //                         item={item}
 //                         index={index}
+//                         isLast={isLast}
 //                         progress={
 //                             scrollYProgress
 //                         }
@@ -116,23 +114,6 @@
 //                     />
 //                 );
 //             })}
-
-//             {/* ================================= */}
-//             {/* FINAL STICKY RUNWAY */}
-//             {/* ================================= */}
-
-//             <Box
-//                 aria-hidden="true"
-//                 sx={{
-//                     height:
-//                         endHoldHeight,
-
-//                     width: "100%",
-
-//                     pointerEvents:
-//                         "none",
-//                 }}
-//             />
 //         </Box>
 //     );
 // }
@@ -140,6 +121,7 @@
 // function StackCard({
 //     item,
 //     index,
+//     isLast,
 //     progress,
 //     range,
 //     targetScale,
@@ -162,19 +144,60 @@
 //         }
 //     );
 
+//     /*
+//      * Only last card:
+//      *
+//      * During the final part of scroll,
+//      * move SUPPORT upward toward its
+//      * final position without requiring
+//      * another 85vh spacer.
+//      */
+//     const lastCardY = useTransform(
+//         progress,
+//         [
+//             Math.max(
+//                 0,
+//                 (index - 0.75) /
+//                 Math.max(
+//                     1,
+//                     index + 1
+//                 )
+//             ),
+//             1,
+//         ],
+//         isLast
+//             ? ["35vh", "0vh"]
+//             : ["0vh", "0vh"]
+//     );
+
+//     const smoothLastCardY =
+//         useSpring(lastCardY, {
+//             stiffness: 90,
+//             damping: 28,
+//             mass: 0.9,
+//         });
+
 //     return (
 //         <Box
 //             sx={{
-//                 /*
-//                  * Every card stays sticky,
-//                  * including IMPLEMENT + SUPPORT.
-//                  */
 //                 position: "sticky",
 
 //                 top: stickyTop,
 
-//                 height:
-//                     cardViewportHeight,
+//                 /*
+//                  * Normal cards create
+//                  * the stack runway.
+//                  *
+//                  * Last card doesn't create
+//                  * another 100vh / 85vh area.
+//                  */
+//                 height: isLast
+//                     ? {
+//                         xs: "55vh",
+//                         sm: "50vh",
+//                         md: "45vh",
+//                     }
+//                     : cardViewportHeight,
 
 //                 display: "flex",
 
@@ -184,21 +207,19 @@
 //                 justifyContent:
 //                     "center",
 
-//                 /*
-//                  * Don't clip cards.
-//                  */
-//                 contain: "layout",
-
 //                 overflow:
 //                     "visible",
 
-//                 mb: 0,
-//                 // GAP BETWEEN CARDS
-//                 mb: {
-//                     xs: 5,
-//                     sm: 6,
-//                     md: 7,
-//                 },
+//                 /*
+//                  * Gap between cards.
+//                  */
+//                 mb: isLast
+//                     ? 0
+//                     : {
+//                         xs: 5,
+//                         sm: 6,
+//                         md: 7,
+//                     },
 
 //                 zIndex:
 //                     index + 1,
@@ -208,6 +229,10 @@
 //                 style={{
 //                     scale:
 //                         smoothScale,
+
+//                     y: isLast
+//                         ? smoothLastCardY
+//                         : 0,
 
 //                     transformOrigin:
 //                         "top center",
@@ -311,8 +336,7 @@ export default function ScrollStackCards2({
                 position: "relative",
                 width: "100%",
 
-                // IMPORTANT:
-                // no fake bottom runway
+                // No extra bottom runway
                 pb: 0,
                 mb: 0,
             }}
@@ -396,12 +420,14 @@ function StackCard({
     );
 
     /*
-     * Only last card:
+     * LAST CARD ONLY
      *
-     * During the final part of scroll,
-     * move SUPPORT upward toward its
-     * final position without requiring
-     * another 85vh spacer.
+     * Start the last card lower so there
+     * is more space between the previous
+     * card content and SUPPORT.
+     *
+     * Increase 48vh if you want even
+     * more space.
      */
     const lastCardY = useTransform(
         progress,
@@ -417,7 +443,7 @@ function StackCard({
             1,
         ],
         isLast
-            ? ["35vh", "0vh"]
+            ? ["8vh", "0vh"]
             : ["0vh", "0vh"]
     );
 
@@ -436,17 +462,17 @@ function StackCard({
                 top: stickyTop,
 
                 /*
-                 * Normal cards create
-                 * the stack runway.
+                 * LAST CARD ONLY
                  *
-                 * Last card doesn't create
-                 * another 100vh / 85vh area.
+                 * Give it a bigger vertical runway
+                 * so it can sit lower and still
+                 * animate upward smoothly.
                  */
                 height: isLast
                     ? {
-                        xs: "55vh",
-                        sm: "50vh",
-                        md: "45vh",
+                        xs: "70vh",
+                        sm: "62vh",
+                        md: "58vh",
                     }
                     : cardViewportHeight,
 
@@ -462,7 +488,10 @@ function StackCard({
                     "visible",
 
                 /*
-                 * Gap between cards.
+                 * Normal card gap.
+                 *
+                 * Last card does not need
+                 * an additional margin-bottom.
                  */
                 mb: isLast
                     ? 0
@@ -481,6 +510,10 @@ function StackCard({
                     scale:
                         smoothScale,
 
+                    /*
+                     * Apply vertical movement
+                     * only to the last card.
+                     */
                     y: isLast
                         ? smoothLastCardY
                         : 0,

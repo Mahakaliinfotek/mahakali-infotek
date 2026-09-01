@@ -84,8 +84,14 @@ export default function ModernBusinessScreens({ activeIndex }) {
                                 x: activeIndex === 0 ? 0 : -40,
                             }}
                             transition={{
-                                duration: 1.1,
-                                ease: [0.22, 1, 0.36, 1],
+                                duration: 2.5,
+                                delay: 0.18,
+                                ease: [
+                                    0.22,
+                                    1,
+                                    0.36,
+                                    1,
+                                ],
                             }}
                             sx={{
                                 maxWidth: {

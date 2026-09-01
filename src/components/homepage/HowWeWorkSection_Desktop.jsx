@@ -19,7 +19,11 @@ import {
     useScroll,
     useTransform,
     useSpring,
+    useMotionValueEvent,
 } from "framer-motion";
+
+
+
 
 const MotionBox = motion.create(Box);
 
@@ -28,14 +32,14 @@ const steps = [
         title: "DISCOVER",
         description:
             "WE UNDERSTAND YOUR VISION, OBJECTIVES, CHALLENGES AND REQUIREMENTS THROUGH DETAILED DISCOVERY CONVERSATIONS AND THE RIGHT QUESTIONS.",
-   
-        },
+
+    },
     {
         title: "SCOPE & PLAN",
         description:
             "WE DEFINE THE REQUIREMENTS, APPROACH, DELIVERABLES AND RESOURCES IN DETAIL, FORMING THE BASIS FOR CLEAR COMMERCIALS AND COMMITTED TIMELINES.",
-   
-        },
+
+    },
     {
         title: "EXECUTE",
         description:
@@ -218,27 +222,52 @@ export default function HowWeWorkSection() {
     }, []);
 
 
-    const rawStage =
-        useTransform(
-            scrollY,
+    // const rawStage =
+    //     useTransform(
+    //         scrollY,
 
-            [
-                layout.sectionStart,
+    //         [
+    //             layout.sectionStart,
 
-                layout.sectionStart +
-                layout.animationDistance,
-            ],
+    //             layout.sectionStart +
+    //             layout.animationDistance,
 
-            [
-                0,
+    //         ],
 
-                steps.length - 1,
-            ],
+    //         [
+    //             0,
 
-            {
-                clamp: true,
-            }
-        );
+    //             steps.length - 1,
+    //         ],
+
+    //         {
+    //             clamp: true,
+    //         }
+    //     );
+    const rawStage = useTransform(
+        scrollY,
+        [
+            layout.sectionStart,
+
+            layout.sectionStart +
+            layout.animationDistance,
+
+            layout.sectionStart +
+            layout.totalDistance,
+        ],
+        [
+            0,
+            steps.length - 1,
+
+            // Important:
+            // allows SUPPORT to also become small
+            // and enter final stacked position
+            steps.length,
+        ],
+        {
+            clamp: true,
+        }
+    );
 
 
 
@@ -392,17 +421,25 @@ export default function HowWeWorkSection() {
                 >
                     <Box
                         sx={{
-                            position:
-                                "relative",
+                            // position:
+                            //     "relative",
 
-                            width:
-                                "70%",
+                            // width:
+                            //     "70%",
 
-                            maxWidth:
-                                "1400px",
+                            // maxWidth:
+                            //     "1400px",
 
-                            height:
-                                "150%",
+                            // height:
+                            //     "150%",
+
+                            // mx: "auto",
+                            position: "relative",
+
+                            width: "85%",
+                            maxWidth: "1700px",
+
+                            height: "150%",
 
                             mx: "auto",
                         }}
@@ -413,27 +450,7 @@ export default function HowWeWorkSection() {
                                 index
                             ) => (
                                 <AnimatedStep
-                                    // key={
-                                    //     step.title
-                                    // }
-                                    // step={
-                                    //     step
-                                    // }
-                                    // index={
-                                    //     index
-                                    // }
-                                    // stage={
-                                    //     stage
-                                    // }
-                                    // settleY={
-                                    //     layout.settleY
-                                    // }
-                                    // enterY={
-                                    //     layout.enterY
-                                    // }
-                                    // gap={
-                                    //     layout.gap
-                                    // }
+
 
                                     key={step.title}
                                     step={step}
@@ -460,104 +477,1443 @@ export default function HowWeWorkSection() {
     );
 }
 
-/* =======================================================
-   INDIVIDUAL ANIMATED STEP
-======================================================= */
 
+// function AnimatedStep({
+//     step,
+
+//     index,
+
+//     stage,
+
+//     settleY,
+
+//     enterY,
+
+//     gap,
+// }) {
+
+//     const local =
+//         useTransform(
+//             stage,
+
+//             (value) =>
+//                 value -
+//                 index
+//         );
+
+
+//     const y =
+//         useTransform(
+//             local,
+
+//             (value) => {
+//                 /*
+//                  * Waiting below.
+//                  */
+//                 if (
+//                     value <= -1
+//                 ) {
+//                     return enterY;
+//                 }
+
+//                 /*
+//                  * NEW ITEM ENTERS.
+//                  */
+//                 if (
+//                     value > -1 &&
+//                     value < 0
+//                 ) {
+//                     const progress =
+//                         easeOutQuint(
+//                             value +
+//                             1
+//                         );
+
+//                     return lerp(
+//                         enterY,
+
+//                         settleY,
+
+//                         progress
+//                     );
+//                 }
+
+//                 /*
+//                  * Existing item moves
+//                  * upward as new items arrive.
+//                  */
+//                 return (
+//                     settleY -
+//                     value *
+//                     gap
+//                 );
+//             }
+//         );
+
+
+
+//     const scale = useTransform(
+//         local,
+//         (value) => {
+//             /*
+//              * FUTURE ITEM
+//              * waiting below viewport
+//              *
+//              * Keep it BIG.
+//              */
+//             if (value <= -1) {
+//                 return 1.9;
+//             }
+
+//             /*
+//              * ENTERING FROM BOTTOM
+//              *
+//              * BIG 1.9
+//              *      ↓
+//              * NORMAL 1
+//              */
+//             if (
+//                 value > -1 &&
+//                 value < 0
+//             ) {
+//                 const progress =
+//                     easeOutQuint(
+//                         value + 1
+//                     );
+
+//                 return lerp(
+//                     1.9,
+//                     1,
+//                     progress
+//                 );
+//             }
+
+//             /*
+//              * Item is now moving
+//              * from CENTER -> TOP.
+//              */
+//             const currentY =
+//                 settleY -
+//                 value * gap;
+
+//             /*
+//              * CENTER / LOWER AREA
+//              *
+//              * Keep normal size.
+//              */
+//             if (currentY >= 180) {
+//                 return 1;
+//             }
+
+//             /*
+//              * TOP AREA
+//              *
+//              * Start shrinking smoothly.
+//              *
+//              * currentY:
+//              *
+//              * 180px -> scale 1
+//              *   0px -> scale ~0.78
+//              * -80px -> scale ~0.70
+//              */
+//             const shrinkProgress =
+//                 clamp(
+//                     (180 - currentY) /
+//                     260,
+//                     0,
+//                     1
+//                 );
+
+//             return lerp(
+//                 1,
+//                 0.7,
+//                 shrinkProgress
+//             );
+//         }
+//     );
+//     /* ==========================================
+//        MAIN OPACITY
+
+//        Fade in from bottom
+//        +
+//        fade out at top
+//     ========================================== */
+
+//     const opacity =
+//         useTransform(
+//             local,
+
+//             (value) => {
+//                 /*
+//                  * Waiting below.
+//                  */
+//                 if (
+//                     value <= -1
+//                 ) {
+//                     return 0;
+//                 }
+
+//                 /*
+//                  * Incoming fade.
+//                  */
+//                 if (
+//                     value > -1 &&
+//                     value <
+//                     -0.62
+//                 ) {
+//                     return clamp(
+//                         (
+//                             value +
+//                             1
+//                         ) /
+//                         0.38,
+
+//                         0,
+
+//                         1
+//                     );
+//                 }
+
+//                 /*
+//                  * Still entering.
+//                  */
+//                 if (
+//                     value < 0
+//                 ) {
+//                     return 1;
+//                 }
+
+//                 const currentY =
+//                     settleY -
+//                     value *
+//                     gap;
+
+//                 /*
+//                  * Fully visible.
+//                  */
+//                 if (
+//                     currentY >=
+//                     80
+//                 ) {
+//                     return 1;
+//                 }
+
+//                 /*
+//                  * =================================
+//                  * BYE-BYE FADE AT TOP
+//                  * =================================
+//                  */
+//                 return clamp(
+//                     (
+//                         currentY +
+//                         100
+//                     ) /
+//                     180,
+
+//                     0,
+
+//                     1
+//                 );
+//             }
+//         );
+
+
+//     const descriptionOpacity =
+//         useTransform(
+//             local,
+
+//             (value) => {
+//                 /*
+//                  * Hidden initially.
+//                  */
+//                 if (
+//                     value <=
+//                     -0.72
+//                 ) {
+//                     return 0;
+//                 }
+
+//                 /*
+//                  * Fade in.
+//                  */
+//                 if (
+//                     value >
+//                     -0.72 &&
+//                     value <
+//                     -0.25
+//                 ) {
+//                     return clamp(
+//                         (
+//                             value +
+//                             0.72
+//                         ) /
+//                         0.47,
+
+//                         0,
+
+//                         1
+//                     );
+//                 }
+
+//                 /*
+//                  * Entering.
+//                  */
+//                 if (
+//                     value < 0
+//                 ) {
+//                     return 1;
+//                 }
+
+//                 const currentY =
+//                     settleY -
+//                     value *
+//                     gap;
+
+//                 /*
+//                  * Normal.
+//                  */
+//                 if (
+//                     currentY >=
+//                     90
+//                 ) {
+//                     return 1;
+//                 }
+
+//                 /*
+//                  * Fade description
+//                  * while leaving top.
+//                  */
+//                 return clamp(
+//                     (
+//                         currentY +
+//                         80
+//                     ) /
+//                     170,
+
+//                     0,
+
+//                     1
+//                 );
+//             }
+//         );
+
+
+//     const descriptionY =
+//         useTransform(
+//             local,
+
+//             (value) => {
+//                 if (
+//                     value <=
+//                     -0.7
+//                 ) {
+//                     return 30;
+//                 }
+
+//                 if (
+//                     value >= 0
+//                 ) {
+//                     return 0;
+//                 }
+
+//                 const progress =
+//                     clamp(
+//                         (
+//                             value +
+//                             0.7
+//                         ) /
+//                         0.7,
+
+//                         0,
+
+//                         1
+//                     );
+
+//                 return lerp(
+//                     30,
+
+//                     0,
+
+//                     easeOutQuint(
+//                         progress
+//                     )
+//                 );
+//             }
+//         );
+
+//     return (
+//         <MotionBox
+//             style={{
+//                 y,
+
+//                 scale,
+
+//                 opacity,
+//             }}
+//             sx={{
+
+//                 position:
+//                     "absolute",
+
+//                 top: 0,
+
+//                 left: 0,
+
+//                 width:
+//                     "100%",
+
+//                 display:
+//                     "flex",
+
+//                 flexDirection:
+//                     "column",
+
+//                 alignItems:
+//                     "center",
+
+//                 justifyContent:
+//                     "center",
+
+//                 textAlign:
+//                     "center",
+
+//                 px: {
+//                     md: 5,
+//                     lg: 8,
+//                 },
+
+//                 transformOrigin:
+//                     "center center",
+
+//                 willChange:
+//                     "transform, opacity",
+
+//                 pointerEvents:
+//                     "none",
+//             }}
+//         >
+//             {/* TITLE */}
+
+//             <Typography
+//                 sx={{
+//                     width:
+//                         "100%",
+
+//                     fontFamily:
+//                         '"Anton", "Arial Narrow", sans-serif',
+
+//                     fontSize: {
+//                         md: "43px",
+//                         lg: "48px",
+//                         xl: "52px",
+//                     },
+
+//                     lineHeight:
+//                         1,
+
+//                     fontWeight:
+//                         400,
+
+//                     color:
+//                         "#fff",
+
+//                     textAlign:
+//                         "center",
+
+//                     textTransform:
+//                         "uppercase",
+
+//                     whiteSpace:
+//                         "nowrap",
+
+//                     /*
+//                      * TITLE -> DESCRIPTION SPACE
+//                      */
+//                     mb: {
+//                         md: 2.8,
+//                         lg: 3,
+//                     },
+//                 }}
+//             >
+//                 {step.title}
+//             </Typography>
+
+//             {/* DESCRIPTION */}
+
+//             <motion.div
+//                 style={{
+//                     opacity:
+//                         descriptionOpacity,
+
+//                     y:
+//                         descriptionY,
+
+//                     width:
+//                         "100%",
+//                 }}
+//             >
+//                 <Typography
+//                     sx={{
+//                         width:
+//                             "100%",
+
+//                         maxWidth: {
+//                             md: "980px",
+//                             lg: "1100px",
+//                             xl: "1150px",
+//                         },
+
+//                         mx: "auto",
+
+//                         fontFamily:
+//                             '"Roboto Mono", monospace',
+
+//                         fontSize: {
+//                             md: "15px",
+//                             lg: "17px",
+//                             xl: "18px",
+//                         },
+
+//                         lineHeight: {
+//                             md: 1.6,
+//                             lg: 1.65,
+//                         },
+
+//                         fontWeight:
+//                             400,
+
+//                         color:
+//                             "rgba(255,255,255,0.94)",
+
+//                         textTransform:
+//                             "uppercase",
+
+//                         textAlign:
+//                             "center",
+
+//                         letterSpacing:
+//                             "0.1px",
+//                     }}
+//                 >
+//                     {
+//                         step.description
+//                     }
+//                 </Typography>
+//             </motion.div>
+//         </MotionBox>
+//     );
+// }
+
+// function AnimatedStep({
+//     step,
+//     index,
+//     stage,
+//     settleY,
+//     enterY,
+//     gap,
+// }) {
+//     const local = useTransform(
+//         stage,
+//         (value) => value - index
+//     );
+
+//     /*
+//      * FINAL TOP STACK POSITION
+//      *
+//      * Every completed item stays visible.
+//      * Each next item gets its own line below.
+//      */
+//     const topStart = 10;
+//     const topGap = 68;
+
+//     const finalTopY =
+//         topStart + index * topGap;
+
+//     /* ==========================================
+//        Y POSITION
+//        SAME ANIMATION FLOW:
+//        bottom -> center -> top
+//     ========================================== */
+
+//     const y = useTransform(
+//         local,
+//         (value) => {
+//             // Waiting below
+//             if (value <= -1) {
+//                 return enterY;
+//             }
+
+//             // Bottom -> center
+//             if (
+//                 value > -1 &&
+//                 value < 0
+//             ) {
+//                 const progress =
+//                     easeOutQuint(
+//                         value + 1
+//                     );
+
+//                 return lerp(
+//                     enterY,
+//                     settleY,
+//                     progress
+//                 );
+//             }
+
+//             // Center -> permanent top position
+//             if (
+//                 value >= 0 &&
+//                 value < 1
+//             ) {
+//                 const progress =
+//                     easeOutQuint(
+//                         value
+//                     );
+
+//                 return lerp(
+//                     settleY,
+//                     finalTopY,
+//                     progress
+//                 );
+//             }
+
+//             // Stop here permanently
+//             return finalTopY;
+//         }
+//     );
+
+//     /* ==========================================
+//        SCALE
+
+//        Incoming:
+//        1.9 -> 1
+
+//        Center -> top:
+//        1 -> 0.52
+
+//        BOTH title + description shrink together.
+//     ========================================== */
+
+//     const scale = useTransform(
+//         local,
+//         (value) => {
+//             // Future item
+//             if (value <= -1) {
+//                 return 1.9;
+//             }
+
+//             // Bottom -> center
+//             if (
+//                 value > -1 &&
+//                 value < 0
+//             ) {
+//                 const progress =
+//                     easeOutQuint(
+//                         value + 1
+//                     );
+
+//                 return lerp(
+//                     1.9,
+//                     1,
+//                     progress
+//                 );
+//             }
+
+//             // Center -> top
+//             if (
+//                 value >= 0 &&
+//                 value < 1
+//             ) {
+//                 const progress =
+//                     easeOutQuint(value);
+
+//                 return lerp(
+//                     1,
+//                     0.52,
+//                     progress
+//                 );
+//             }
+
+//             // Keep small permanently
+//             return 0.52;
+//         }
+//     );
+
+//     /* ==========================================
+//        MAIN OPACITY
+
+//        Fade in only.
+//        NEVER fade out at the top.
+//     ========================================== */
+
+//     const opacity = useTransform(
+//         local,
+//         (value) => {
+//             // Waiting below
+//             if (value <= -1) {
+//                 return 0;
+//             }
+
+//             // Initial fade in
+//             if (
+//                 value > -1 &&
+//                 value < -0.62
+//             ) {
+//                 return clamp(
+//                     (value + 1) / 0.38,
+//                     0,
+//                     1
+//                 );
+//             }
+
+//             // Always visible afterwards
+//             return 1;
+//         }
+//     );
+
+//     /* ==========================================
+//        DESCRIPTION OPACITY
+
+//        Important:
+//        Description no longer disappears.
+
+//        It only fades in while entering,
+//        then remains fully visible forever.
+//     ========================================== */
+
+//     const descriptionOpacity =
+//         useTransform(
+//             local,
+//             (value) => {
+//                 if (value <= -0.72) {
+//                     return 0;
+//                 }
+
+//                 if (
+//                     value > -0.72 &&
+//                     value < -0.25
+//                 ) {
+//                     return clamp(
+//                         (
+//                             value +
+//                             0.72
+//                         ) /
+//                         0.47,
+//                         0,
+//                         1
+//                     );
+//                 }
+
+//                 return 1;
+//             }
+//         );
+
+//     /* ==========================================
+//        DESCRIPTION ENTRY Y
+//        SAME AS YOUR EXISTING ANIMATION
+//     ========================================== */
+
+//     const descriptionY =
+//         useTransform(
+//             local,
+//             (value) => {
+//                 if (value <= -0.7) {
+//                     return 30;
+//                 }
+
+//                 if (value >= 0) {
+//                     return 0;
+//                 }
+
+//                 const progress =
+//                     clamp(
+//                         (
+//                             value +
+//                             0.7
+//                         ) /
+//                         0.7,
+//                         0,
+//                         1
+//                     );
+
+//                 return lerp(
+//                     30,
+//                     0,
+//                     easeOutQuint(
+//                         progress
+//                     )
+//                 );
+//             }
+//         );
+
+//     return (
+//         <MotionBox
+//             style={{
+//                 y,
+//                 scale,
+//                 opacity,
+//             }}
+//             sx={{
+//                 position: "absolute",
+
+//                 top: 0,
+//                 left: 0,
+
+//                 width: "100%",
+
+//                 display: "flex",
+
+//                 flexDirection:
+//                     "column",
+
+//                 alignItems:
+//                     "center",
+
+//                 justifyContent:
+//                     "center",
+
+//                 textAlign:
+//                     "center",
+
+//                 px: {
+//                     md: 5,
+//                     lg: 8,
+//                 },
+
+//                 /*
+//                  * Important for top stacking:
+//                  * shrink from top instead of center.
+//                  */
+//                 transformOrigin:
+//                     "top center",
+
+//                 willChange:
+//                     "transform, opacity",
+
+//                 pointerEvents:
+//                     "none",
+//             }}
+//         >
+//             {/* TITLE */}
+
+//             <Typography
+//                 sx={{
+//                     width: "100%",
+
+//                     fontFamily:
+//                         '"Anton", "Arial Narrow", sans-serif',
+
+//                     fontSize: {
+//                         md: "40px",
+
+//                     },
+
+//                     lineHeight: 1,
+
+//                     fontWeight: 400,
+
+//                     color: "#fff",
+
+//                     textAlign:
+//                         "center",
+
+//                     textTransform:
+//                         "uppercase",
+
+//                     whiteSpace:
+//                         "nowrap",
+
+//                     mb: {
+//                         md: 2.8,
+//                         lg: 3,
+//                     },
+//                 }}
+//             >
+//                 {step.title}
+//             </Typography>
+
+//             {/* DESCRIPTION */}
+
+//             <motion.div
+//                 style={{
+//                     opacity:
+//                         descriptionOpacity,
+
+//                     y:
+//                         descriptionY,
+
+//                     width:
+//                         "100%",
+//                 }}
+//             >
+//                 <Typography
+//                     sx={{
+//                         width: "100%",
+
+//                         maxWidth: {
+//                             md: "980px",
+//                             lg: "1100px",
+//                             xl: "1150px",
+//                         },
+
+//                         mx: "auto",
+
+//                         fontFamily:
+//                             '"Roboto Mono", monospace',
+
+//                         fontSize: {
+//                             md: "15px",
+//                             lg: "17px",
+//                             xl: "18px",
+//                         },
+
+//                         lineHeight: {
+//                             md: 1.6,
+//                             lg: 1.65,
+//                         },
+
+//                         fontWeight:
+//                             400,
+
+//                         color:
+//                             "rgba(255,255,255,0.94)",
+
+//                         textTransform:
+//                             "uppercase",
+
+//                         textAlign:
+//                             "center",
+
+//                         letterSpacing:
+//                             "0.1px",
+//                     }}
+//                 >
+//                     {step.description}
+//                 </Typography>
+//             </motion.div>
+//         </MotionBox>
+//     );
+// }
+
+// function AnimatedStep({
+//     step,
+//     index,
+//     stage,
+//     settleY,
+//     enterY,
+//     gap,
+// }) {
+//     const [stacked, setStacked] =
+//         useState(false);
+
+//     const local = useTransform(
+//         stage,
+//         (value) => value - index
+//     );
+
+//     /*
+//      * Detect when item completely reaches
+//      * its final top stacked position.
+//      */
+//     useMotionValueEvent(
+//         local,
+//         "change",
+//         (value) => {
+//             setStacked(value >= 1);
+//         }
+//     );
+
+//     /*
+//      * FINAL STACK POSITION
+//      */
+//     const topStart = 10;
+//     const topGap = 68;
+
+//     const finalTopY =
+//         topStart + index * topGap;
+
+//     /* ==========================================
+//        POSITION
+//        BOTTOM -> CENTER -> TOP
+//     ========================================== */
+
+//     const y = useTransform(
+//         local,
+//         (value) => {
+//             /*
+//              * Waiting below
+//              */
+//             if (value <= -1) {
+//                 return enterY;
+//             }
+
+//             /*
+//              * Bottom -> Center
+//              */
+//             if (
+//                 value > -1 &&
+//                 value < 0
+//             ) {
+//                 const progress =
+//                     easeOutQuint(
+//                         value + 1
+//                     );
+
+//                 return lerp(
+//                     enterY,
+//                     settleY,
+//                     progress
+//                 );
+//             }
+
+//             /*
+//              * Center -> Top Stack
+//              */
+//             if (
+//                 value >= 0 &&
+//                 value < 1
+//             ) {
+//                 const progress =
+//                     easeOutQuint(value);
+
+//                 return lerp(
+//                     settleY,
+//                     finalTopY,
+//                     progress
+//                 );
+//             }
+
+//             /*
+//              * Stay permanently
+//              * at top stack position
+//              */
+//             return finalTopY;
+//         }
+//     );
+
+//     /* ==========================================
+//        SCALE
+
+//        Bottom = 1.9
+//        Center = 1
+//        Top = 0.52
+//     ========================================== */
+
+//     const scale = useTransform(
+//         local,
+//         (value) => {
+//             /*
+//              * Future item
+//              */
+//             if (value <= -1) {
+//                 return 1.9;
+//             }
+
+//             /*
+//              * Bottom -> Center
+//              */
+//             if (
+//                 value > -1 &&
+//                 value < 0
+//             ) {
+//                 const progress =
+//                     easeOutQuint(
+//                         value + 1
+//                     );
+
+//                 return lerp(
+//                     1.9,
+//                     1,
+//                     progress
+//                 );
+//             }
+
+//             /*
+//              * Center -> Top
+//              */
+//             if (
+//                 value >= 0 &&
+//                 value < 1
+//             ) {
+//                 const progress =
+//                     easeOutQuint(value);
+
+//                 return lerp(
+//                     1,
+//                     0.52,
+//                     progress
+//                 );
+//             }
+
+//             /*
+//              * Final stacked size
+//              */
+//             return 0.52;
+//         }
+//     );
+
+//     /* ==========================================
+//        MAIN OPACITY
+//        Fade in only.
+//        Never disappear.
+//     ========================================== */
+
+//     const opacity = useTransform(
+//         local,
+//         (value) => {
+//             if (value <= -1) {
+//                 return 0;
+//             }
+
+//             if (
+//                 value > -1 &&
+//                 value < -0.62
+//             ) {
+//                 return clamp(
+//                     (value + 1) /
+//                     0.38,
+//                     0,
+//                     1
+//                 );
+//             }
+
+//             return 1;
+//         }
+//     );
+
+//     /* ==========================================
+//        DESCRIPTION OPACITY
+
+//        Description stays visible forever.
+//     ========================================== */
+
+//     const descriptionOpacity =
+//         useTransform(
+//             local,
+//             (value) => {
+//                 if (
+//                     value <= -0.72
+//                 ) {
+//                     return 0;
+//                 }
+
+//                 if (
+//                     value > -0.72 &&
+//                     value < -0.25
+//                 ) {
+//                     return clamp(
+//                         (
+//                             value +
+//                             0.72
+//                         ) /
+//                         0.47,
+//                         0,
+//                         1
+//                     );
+//                 }
+
+//                 return 1;
+//             }
+//         );
+
+//     /* ==========================================
+//        DESCRIPTION ENTRY Y
+//     ========================================== */
+
+//     const descriptionY =
+//         useTransform(
+//             local,
+//             (value) => {
+//                 if (
+//                     value <= -0.7
+//                 ) {
+//                     return 30;
+//                 }
+
+//                 if (value >= 0) {
+//                     return 0;
+//                 }
+
+//                 const progress =
+//                     clamp(
+//                         (
+//                             value +
+//                             0.7
+//                         ) /
+//                         0.7,
+//                         0,
+//                         1
+//                     );
+
+//                 return lerp(
+//                     30,
+//                     0,
+//                     easeOutQuint(
+//                         progress
+//                     )
+//                 );
+//             }
+//         );
+
+//     return (
+//         <MotionBox
+//             style={{
+//                 y,
+//                 scale,
+//                 opacity,
+//             }}
+//             sx={{
+//                 position: "absolute",
+
+//                 top: 0,
+//                 left: 0,
+
+//                 width: "100%",
+
+//                 display: "flex",
+//                 flexDirection: "column",
+
+//                 alignItems: "center",
+//                 justifyContent: "center",
+
+//                 textAlign: "center",
+
+//                 px: {
+//                     md: 5,
+//                     lg: 8,
+//                 },
+
+//                 transformOrigin:
+//                     "top center",
+
+//                 willChange:
+//                     "transform, opacity",
+
+//                 pointerEvents: "none",
+//             }}
+//         >
+//             {/* ==================================
+//                 TITLE
+//             ================================== */}
+
+//             <Typography
+//                 sx={{
+//                     width: "100%",
+
+//                     fontFamily:
+//                         '"Anton", "Arial Narrow", sans-serif',
+
+//                     fontSize: {
+//                         md: "40px",
+//                     },
+
+//                     lineHeight: 1,
+
+//                     fontWeight: 400,
+
+//                     color: "#fff",
+
+//                     textAlign: "center",
+
+//                     textTransform:
+//                         "uppercase",
+
+//                     whiteSpace: "nowrap",
+
+//                     mb: stacked
+//                         ? 1.4
+//                         : {
+//                             md: 2.8,
+//                             lg: 3,
+//                         },
+//                 }}
+//             >
+//                 {step.title}
+//             </Typography>
+
+//             {/* ==================================
+//                 DESCRIPTION
+//             ================================== */}
+
+//             {/* ==================================
+//     DESCRIPTION
+// ================================== */}
+
+//             <motion.div
+//                 style={{
+//                     opacity: descriptionOpacity,
+//                     y: descriptionY,
+
+//                     width: "100%",
+
+//                     display: "flex",
+//                     justifyContent: "center",
+//                     alignItems: "center",
+//                 }}
+//             >
+//                 <Typography
+//                     sx={{
+//                         /*
+//                          * IMPORTANT:
+//                          *
+//                          * stacked:
+//                          * actual text width + wrapper centers it
+//                          *
+//                          * active:
+//                          * normal responsive width
+//                          */
+//                         width: stacked
+//                             ? "max-content"
+//                             : "100%",
+
+//                         maxWidth: stacked
+//                             ? "none"
+//                             : {
+//                                 md: "980px",
+//                                 lg: "1100px",
+//                                 xl: "1150px",
+//                             },
+
+//                         flexShrink: 0,
+
+//                         fontFamily:
+//                             '"Roboto Mono", monospace',
+
+//                         fontSize: stacked
+//                             ? {
+//                                 md: "15px",
+//                                 lg: "16px",
+//                                 xl: "17px",
+//                             }
+//                             : {
+//                                 md: "15px",
+//                                 lg: "17px",
+//                                 xl: "18px",
+//                             },
+
+//                         lineHeight: stacked
+//                             ? 1.3
+//                             : {
+//                                 md: 1.6,
+//                                 lg: 1.65,
+//                             },
+
+//                         fontWeight: 400,
+
+//                         color:
+//                             "rgba(255,255,255,0.94)",
+
+//                         textTransform:
+//                             "uppercase",
+
+//                         textAlign:
+//                             "center",
+
+//                         letterSpacing:
+//                             "0.1px",
+
+//                         whiteSpace: stacked
+//                             ? "nowrap"
+//                             : "normal",
+//                     }}
+//                 >
+//                     {step.description}
+//                 </Typography>
+//             </motion.div>
+//         </MotionBox>
+//     );
+// }
 function AnimatedStep({
     step,
-
     index,
-
     stage,
-
     settleY,
-
     enterY,
-
     gap,
 }) {
+    const local = useTransform(
+        stage,
+        (value) => value - index
+    );
 
-    const local =
-        useTransform(
-            stage,
+    /*
+     * FINAL STACK POSITION
+     */
+    const topStart = 10;
+    const topGap = 68;
 
-            (value) =>
-                value -
-                index
-        );
+    const finalTopY =
+        topStart + index * topGap;
 
+    /* ==========================================
+       Y POSITION
 
-    const y =
-        useTransform(
-            local,
+       Bottom -> Center -> Top
 
-            (value) => {
-                /*
-                 * Waiting below.
-                 */
-                if (
-                    value <= -1
-                ) {
-                    return enterY;
-                }
+       No React state changes here.
+    ========================================== */
 
-                /*
-                 * NEW ITEM ENTERS.
-                 */
-                if (
-                    value > -1 &&
-                    value < 0
-                ) {
-                    const progress =
-                        easeOutQuint(
-                            value +
-                            1
-                        );
+    const y = useTransform(
+        local,
+        (value) => {
+            // Waiting below
+            if (value <= -1) {
+                return enterY;
+            }
 
-                    return lerp(
-                        enterY,
-
-                        settleY,
-
-                        progress
+            // Bottom -> center
+            if (
+                value > -1 &&
+                value < 0
+            ) {
+                const progress =
+                    easeOutQuint(
+                        value + 1
                     );
-                }
 
-                /*
-                 * Existing item moves
-                 * upward as new items arrive.
-                 */
-                return (
-                    settleY -
-                    value *
-                    gap
+                return lerp(
+                    enterY,
+                    settleY,
+                    progress
                 );
             }
-        );
 
+            // Center -> final top position
+            if (
+                value >= 0 &&
+                value < 1
+            ) {
+                const progress =
+                    easeOutQuint(value);
 
+                return lerp(
+                    settleY,
+                    finalTopY,
+                    progress
+                );
+            }
+
+            // Stay in final position
+            return finalTopY;
+        }
+    );
+
+    /* ==========================================
+       SCALE
+
+       Bottom  = 1.9
+       Center  = 1
+       Final   = 0.52
+    ========================================== */
 
     const scale = useTransform(
         local,
         (value) => {
-            /*
-             * FUTURE ITEM
-             * waiting below viewport
-             *
-             * Keep it BIG.
-             */
             if (value <= -1) {
                 return 1.9;
             }
 
-            /*
-             * ENTERING FROM BOTTOM
-             *
-             * BIG 1.9
-             *      ↓
-             * NORMAL 1
-             */
+            // Bottom -> center
             if (
                 value > -1 &&
                 value < 0
@@ -574,252 +1930,81 @@ function AnimatedStep({
                 );
             }
 
-            /*
-             * Item is now moving
-             * from CENTER -> TOP.
-             */
-            const currentY =
-                settleY -
-                value * gap;
+            // Center -> top
+            if (
+                value >= 0 &&
+                value < 1
+            ) {
+                const progress =
+                    easeOutQuint(value);
 
-            /*
-             * CENTER / LOWER AREA
-             *
-             * Keep normal size.
-             */
-            if (currentY >= 180) {
-                return 1;
+                return lerp(
+                    1,
+                    0.52,
+                    progress
+                );
             }
 
-            /*
-             * TOP AREA
-             *
-             * Start shrinking smoothly.
-             *
-             * currentY:
-             *
-             * 180px -> scale 1
-             *   0px -> scale ~0.78
-             * -80px -> scale ~0.70
-             */
-            const shrinkProgress =
-                clamp(
-                    (180 - currentY) /
-                    260,
-                    0,
-                    1
-                );
-
-            return lerp(
-                1,
-                0.7,
-                shrinkProgress
-            );
+            return 0.52;
         }
     );
+
     /* ==========================================
        MAIN OPACITY
 
-       Fade in from bottom
-       +
-       fade out at top
+       Only fade in.
+       Never fade out.
     ========================================== */
 
-    const opacity =
-        useTransform(
-            local,
+    const opacity = useTransform(
+        local,
+        (value) => {
+            if (value <= -1) {
+                return 0;
+            }
 
-            (value) => {
-                /*
-                 * Waiting below.
-                 */
-                if (
-                    value <= -1
-                ) {
-                    return 0;
-                }
-
-                /*
-                 * Incoming fade.
-                 */
-                if (
-                    value > -1 &&
-                    value <
-                    -0.62
-                ) {
-                    return clamp(
-                        (
-                            value +
-                            1
-                        ) /
-                        0.38,
-
-                        0,
-
-                        1
-                    );
-                }
-
-                /*
-                 * Still entering.
-                 */
-                if (
-                    value < 0
-                ) {
-                    return 1;
-                }
-
-                const currentY =
-                    settleY -
-                    value *
-                    gap;
-
-                /*
-                 * Fully visible.
-                 */
-                if (
-                    currentY >=
-                    80
-                ) {
-                    return 1;
-                }
-
-                /*
-                 * =================================
-                 * BYE-BYE FADE AT TOP
-                 * =================================
-                 */
+            if (
+                value > -1 &&
+                value < -0.62
+            ) {
                 return clamp(
-                    (
-                        currentY +
-                        100
-                    ) /
-                    180,
-
+                    (value + 1) / 0.38,
                     0,
-
                     1
                 );
             }
-        );
 
+            return 1;
+        }
+    );
 
-    const descriptionOpacity =
-        useTransform(
-            local,
-
-            (value) => {
-                /*
-                 * Hidden initially.
-                 */
-                if (
-                    value <=
-                    -0.72
-                ) {
-                    return 0;
-                }
-
-                /*
-                 * Fade in.
-                 */
-                if (
-                    value >
-                    -0.72 &&
-                    value <
-                    -0.25
-                ) {
-                    return clamp(
-                        (
-                            value +
-                            0.72
-                        ) /
-                        0.47,
-
-                        0,
-
-                        1
-                    );
-                }
-
-                /*
-                 * Entering.
-                 */
-                if (
-                    value < 0
-                ) {
-                    return 1;
-                }
-
-                const currentY =
-                    settleY -
-                    value *
-                    gap;
-
-                /*
-                 * Normal.
-                 */
-                if (
-                    currentY >=
-                    90
-                ) {
-                    return 1;
-                }
-
-                /*
-                 * Fade description
-                 * while leaving top.
-                 */
-                return clamp(
-                    (
-                        currentY +
-                        80
-                    ) /
-                    170,
-
-                    0,
-
-                    1
-                );
-            }
-        );
-
+    /* ==========================================
+       DESCRIPTION ENTRY
+    ========================================== */
 
     const descriptionY =
         useTransform(
             local,
-
             (value) => {
-                if (
-                    value <=
-                    -0.7
-                ) {
+                if (value <= -0.7) {
                     return 30;
                 }
 
-                if (
-                    value >= 0
-                ) {
+                if (value >= 0) {
                     return 0;
                 }
 
                 const progress =
                     clamp(
-                        (
-                            value +
-                            0.7
-                        ) /
+                        (value + 0.7) /
                         0.7,
-
                         0,
-
                         1
                     );
 
                 return lerp(
                     30,
-
                     0,
-
                     easeOutQuint(
                         progress
                     )
@@ -827,41 +2012,139 @@ function AnimatedStep({
             }
         );
 
+    /* ==========================================
+       NORMAL DESCRIPTION OPACITY
+
+       Normal multiline description stays
+       visible through most of center -> top.
+
+       Then smoothly fades out near completion.
+    ========================================== */
+
+    const normalDescriptionOpacity =
+        useTransform(
+            local,
+            (value) => {
+                // Not entered yet
+                if (value <= -0.72) {
+                    return 0;
+                }
+
+                // Fade in
+                if (
+                    value > -0.72 &&
+                    value < -0.25
+                ) {
+                    return clamp(
+                        (value + 0.72) /
+                        0.47,
+                        0,
+                        1
+                    );
+                }
+
+                // Fully visible
+                if (value <= 0.72) {
+                    return 1;
+                }
+
+                // Smoothly crossfade out
+                if (
+                    value > 0.72 &&
+                    value < 1
+                ) {
+                    const progress =
+                        clamp(
+                            (value - 0.72) /
+                            0.28,
+                            0,
+                            1
+                        );
+
+                    return (
+                        1 -
+                        easeOutQuint(
+                            progress
+                        )
+                    );
+                }
+
+                return 0;
+            }
+        );
+
+    /* ==========================================
+       FINAL ONE-LINE DESCRIPTION
+
+       Starts appearing before item completely
+       reaches the stack.
+
+       Because both versions crossfade,
+       there is NO abrupt layout switch.
+    ========================================== */
+
+    const stackedDescriptionOpacity =
+        useTransform(
+            local,
+            (value) => {
+                if (value <= 0.72) {
+                    return 0;
+                }
+
+                if (value < 1) {
+                    const progress =
+                        clamp(
+                            (value - 0.72) /
+                            0.28,
+                            0,
+                            1
+                        );
+
+                    return easeOutQuint(
+                        progress
+                    );
+                }
+
+                return 1;
+            }
+        );
+
+    /*
+     * Small movement during description
+     * crossfade makes the transition softer.
+     */
+    const stackedDescriptionY =
+        useTransform(
+            local,
+            [0.72, 1],
+            [5, 0],
+            {
+                clamp: true,
+            }
+        );
+
     return (
         <MotionBox
             style={{
                 y,
-
                 scale,
-
                 opacity,
             }}
             sx={{
-
-                position:
-                    "absolute",
+                position: "absolute",
 
                 top: 0,
-
                 left: 0,
 
-                width:
-                    "100%",
+                width: "100%",
 
-                display:
-                    "flex",
+                display: "flex",
+                flexDirection: "column",
 
-                flexDirection:
-                    "column",
+                alignItems: "center",
+                justifyContent: "center",
 
-                alignItems:
-                    "center",
-
-                justifyContent:
-                    "center",
-
-                textAlign:
-                    "center",
+                textAlign: "center",
 
                 px: {
                     md: 5,
@@ -869,123 +2152,237 @@ function AnimatedStep({
                 },
 
                 transformOrigin:
-                    "center center",
+                    "top center",
 
                 willChange:
                     "transform, opacity",
 
-                pointerEvents:
-                    "none",
+                /*
+                 * GPU acceleration
+                 */
+                transform:
+                    "translateZ(0)",
+
+                backfaceVisibility:
+                    "hidden",
+
+                pointerEvents: "none",
             }}
         >
-            {/* TITLE */}
+            {/* ==================================
+                TITLE
+            ================================== */}
 
             <Typography
                 sx={{
-                    width:
-                        "100%",
+                    width: "100%",
 
                     fontFamily:
                         '"Anton", "Arial Narrow", sans-serif',
 
                     fontSize: {
-                        md: "43px",
-                        lg: "48px",
-                        xl: "52px",
+                        md: "40px",
                     },
 
-                    lineHeight:
-                        1,
+                    lineHeight: 1,
 
-                    fontWeight:
-                        400,
+                    fontWeight: 400,
 
-                    color:
-                        "#fff",
+                    color: "#fff",
 
-                    textAlign:
-                        "center",
+                    textAlign: "center",
 
                     textTransform:
                         "uppercase",
 
-                    whiteSpace:
-                        "nowrap",
+                    whiteSpace: "nowrap",
 
                     /*
-                     * TITLE -> DESCRIPTION SPACE
+                     * Keep constant.
+                     *
+                     * Do NOT change margin using
+                     * stacked state because that
+                     * causes a layout jump.
                      */
                     mb: {
-                        md: 2.8,
-                        lg: 3,
+                        md: 2,
+                        lg: 2,
                     },
                 }}
             >
                 {step.title}
             </Typography>
 
-            {/* DESCRIPTION */}
+            {/* ==================================
+                DESCRIPTION AREA
+            ================================== */}
 
-            <motion.div
-                style={{
-                    opacity:
-                        descriptionOpacity,
+            <Box
+                sx={{
+                    position: "relative",
 
-                    y:
-                        descriptionY,
+                    width: "100%",
 
-                    width:
-                        "100%",
+                    display: "flex",
+
+                    justifyContent:
+                        "center",
+
+                    alignItems:
+                        "flex-start",
+
+                    /*
+                     * Keeps both description
+                     * versions in same area.
+                     */
+                    minHeight: {
+                        md: "50px",
+                        lg: "55px",
+                    },
                 }}
             >
-                <Typography
-                    sx={{
-                        width:
-                            "100%",
+                {/* ==============================
+                    NORMAL DESCRIPTION
 
-                        maxWidth: {
-                            md: "980px",
-                            lg: "1100px",
-                            xl: "1150px",
-                        },
+                    Can wrap to multiple lines.
+                ============================== */}
 
-                        mx: "auto",
+                <motion.div
+                    style={{
+                        opacity:
+                            normalDescriptionOpacity,
 
-                        fontFamily:
-                            '"Roboto Mono", monospace',
+                        y: descriptionY,
 
-                        fontSize: {
-                            md: "15px",
-                            lg: "17px",
-                            xl: "18px",
-                        },
+                        width: "100%",
 
-                        lineHeight: {
-                            md: 1.6,
-                            lg: 1.65,
-                        },
+                        position:
+                            "absolute",
 
-                        fontWeight:
-                            400,
+                        left: 0,
+                        top: 0,
 
-                        color:
-                            "rgba(255,255,255,0.94)",
-
-                        textTransform:
-                            "uppercase",
-
-                        textAlign:
-                            "center",
-
-                        letterSpacing:
-                            "0.1px",
+                        willChange:
+                            "opacity, transform",
                     }}
                 >
-                    {
-                        step.description
-                    }
-                </Typography>
-            </motion.div>
+                    <Typography
+                        sx={{
+                            width:
+                                "100%",
+
+                            maxWidth: {
+                                md: "880px",
+
+                            },
+
+                            mx: "auto",
+
+                            fontFamily:
+                                '"Roboto Mono", monospace',
+
+                            fontSize: {
+                                md: "15px",
+                                lg: "17px",
+                                xl: "18px",
+                            },
+
+                            lineHeight: {
+                                md: 1.6,
+                                lg: 1.65,
+                            },
+
+                            fontWeight:
+                                400,
+
+                            color:
+                                "rgba(255,255,255,0.94)",
+
+                            textTransform:
+                                "uppercase",
+
+                            textAlign:
+                                "center",
+
+                            letterSpacing:
+                                "0.1px",
+
+                            whiteSpace:
+                                "normal",
+                        }}
+                    >
+                        {step.description}
+                    </Typography>
+                </motion.div>
+
+                {/* ==============================
+                    FINAL STACKED DESCRIPTION
+
+                    Always one line.
+
+                    It fades in instead of
+                    suddenly changing CSS.
+                ============================== */}
+
+                <motion.div
+                    style={{
+                        opacity:
+                            stackedDescriptionOpacity,
+
+                        y:
+                            stackedDescriptionY,
+
+                        position:
+                            "absolute",
+
+                        left: "50%",
+                        top: 0,
+
+                        x: "-50%",
+
+                        willChange:
+                            "opacity, transform",
+                    }}
+                >
+                    <Typography
+                        sx={{
+                            width:
+                                "max-content",
+
+                            fontFamily:
+                                '"Roboto Mono", monospace',
+
+                            fontSize: {
+                                md: "25px",
+
+                            },
+
+                            lineHeight:
+                                1.3,
+
+                            fontWeight:
+                                400,
+
+                            color:
+                                "rgba(255,255,255,0.94)",
+
+                            textTransform:
+                                "uppercase",
+
+                            textAlign:
+                                "center",
+
+                            letterSpacing:
+                                "0.1px",
+
+                            whiteSpace:
+                                "nowrap",
+                        }}
+                    >
+                        {step.description}
+                    </Typography>
+                </motion.div>
+            </Box>
         </MotionBox>
     );
 }

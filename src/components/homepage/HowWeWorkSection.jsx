@@ -90,7 +90,7 @@ function HowWeWorkCard({
                 minHeight: {
                     xs: "310px",
                     sm: "380px",
-                    md: "420px",
+                    // md: "420px",
                 },
 
                 overflow: "hidden",
@@ -205,16 +205,8 @@ function HowWeWorkCard({
 export default function HowWeWorkSection() {
     const scrollRef = useRef(null);
     const cardRefs = useRef([]);
-
-
-
-
     const [activeIndex, setActiveIndex] = useState(0);
-
     const isCompleteRef = useRef(false);
-
-
-
     useEffect(() => {
         const scrollContainer =
             scrollRef.current;

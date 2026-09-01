@@ -782,6 +782,8 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
 import { toast } from "react-toast";
+import { useState } from "react";
+import XIcon from "@mui/icons-material/X";
 
 const MotionBox = motion.create(Box);
 
@@ -818,6 +820,149 @@ const contactData = [
     },
 ];
 
+// const FormField = ({
+//     label,
+//     placeholder,
+//     type = "text",
+//     multiline = false,
+//     name,
+//     value,
+//     onChange,
+//     onBlur,
+//     error,
+// }) => {
+//     return (
+//         <Box
+//             sx={{
+//                 width: "100%",
+//             }}
+//         >
+//             <Typography
+//                 sx={{
+//                     fontFamily:
+//                         '"Roboto Mono", monospace',
+
+//                     fontSize: {
+//                         xs: "12px",
+//                         md: "14px",
+//                     },
+
+//                     color: "#00A878",
+
+//                     textTransform: "uppercase",
+
+//                     mb: {
+//                         xs: 1.5,
+//                         md: 2,
+//                     },
+//                 }}
+//             >
+//                 {label}
+//             </Typography>
+
+//             {multiline ? (
+//                 <Box
+//                     component="textarea"
+//                     name={name}
+//                     value={value}
+//                     onChange={onChange}
+//                     onBlur={onBlur}
+//                     placeholder={placeholder}
+//                     rows={3}
+//                     sx={{
+//                         width: "100%",
+
+//                         resize: "none",
+
+//                         border: "none",
+//                         outline: "none",
+
+//                         borderBottom:
+//                             "1px solid rgba(255,255,255,0.12)",
+
+//                         bgcolor: "transparent",
+
+//                         color: "#fff",
+
+//                         fontFamily:
+//                             '"Roboto Mono", monospace',
+
+//                         fontSize: {
+//                             xs: "14px",
+//                             md: "17px",
+//                         },
+
+//                         lineHeight: 1.6,
+
+//                         pb: 2,
+
+//                         "&::placeholder": {
+//                             color:
+//                                 "rgba(255,255,255,0.52)",
+
+//                             opacity: 1,
+//                         },
+//                     }}
+//                 />
+//             ) : (
+//                 <Box
+//                     component="input"
+//                     type={type}
+//                     name={name}
+//                     value={value}
+//                     onChange={onChange}
+//                     onBlur={onBlur}
+//                     placeholder={placeholder}
+//                     sx={{
+//                         width: "100%",
+
+//                         border: "none",
+//                         outline: "none",
+
+//                         borderBottom:
+//                             "1px solid rgba(255,255,255,0.12)",
+
+//                         bgcolor: "transparent",
+
+//                         color: "#fff",
+
+//                         fontFamily:
+//                             '"Roboto Mono", monospace',
+
+//                         fontSize: {
+//                             xs: "14px",
+//                             md: "17px",
+//                         },
+
+//                         pb: 1.8,
+
+//                         "&::placeholder": {
+//                             color:
+//                                 "rgba(255,255,255,0.52)",
+
+//                             opacity: 1,
+//                         },
+//                     }}
+//                 />
+//             )}
+
+//             {error && (
+//                 <Typography
+//                     sx={{
+//                         mt: 0.8,
+//                         color: "#ff6b6b",
+//                         fontFamily:
+//                             '"Roboto Mono", monospace',
+//                         fontSize: "11px",
+//                     }}
+//                 >
+//                     {error}
+//                 </Typography>
+//             )}
+//         </Box>
+//     );
+// };
+
 const FormField = ({
     label,
     placeholder,
@@ -829,129 +974,271 @@ const FormField = ({
     onBlur,
     error,
 }) => {
+    const [isFocused, setIsFocused] =
+        useState(false);
+
+    const isActive =
+        isFocused || Boolean(value);
+
+    const handleBlur = (event) => {
+        setIsFocused(false);
+
+        if (onBlur) {
+            onBlur(event);
+        }
+    };
+
     return (
         <Box
             sx={{
                 width: "100%",
             }}
         >
-            <Typography
+            <Box
                 sx={{
-                    fontFamily:
-                        '"Roboto Mono", monospace',
+                    position: "relative",
 
-                    fontSize: {
-                        xs: "12px",
-                        md: "14px",
-                    },
+                    width: "100%",
 
-                    color: "#00A878",
+                    border: error
+                        ? "1px solid #ff6b6b"
+                        : isFocused
+                            ? "1px solid #00A878"
+                            : "1px solid rgba(255,255,255,0.18)",
 
-                    textTransform: "uppercase",
+                    borderRadius: "10px",
 
-                    mb: {
-                        xs: 1.5,
-                        md: 2,
-                    },
+                    bgcolor:
+                        "rgba(255,255,255,0.02)",
+
+                    transition:
+                        "border-color 0.3s ease",
                 }}
             >
-                {label}
-            </Typography>
+                {/* FLOATING LABEL */}
 
-            {multiline ? (
-                <Box
-                    component="textarea"
-                    name={name}
-                    value={value}
-                    onChange={onChange}
-                    onBlur={onBlur}
-                    placeholder={placeholder}
-                    rows={3}
-                    sx={{
-                        width: "100%",
+                {isActive && (
+                    <Typography
+                        sx={{
+                            position:
+                                "absolute",
 
-                        resize: "none",
+                            top: "-9px",
 
-                        border: "none",
-                        outline: "none",
+                            left: "16px",
 
-                        borderBottom:
-                            "1px solid rgba(255,255,255,0.12)",
+                            px: 0.8,
 
-                        bgcolor: "transparent",
+                            bgcolor:
+                                "#0B110F",
 
-                        color: "#fff",
+                            zIndex: 2,
 
-                        fontFamily:
-                            '"Roboto Mono", monospace',
+                            fontFamily:
+                                '"Roboto Mono", monospace',
 
-                        fontSize: {
-                            xs: "14px",
-                            md: "17px",
-                        },
+                            fontSize: {
+                                xs: "10px",
+                                md: "11px",
+                            },
 
-                        lineHeight: 1.6,
-
-                        pb: 2,
-
-                        "&::placeholder": {
                             color:
-                                "rgba(255,255,255,0.52)",
+                                "#00A878",
 
-                            opacity: 1,
-                        },
-                    }}
-                />
-            ) : (
-                <Box
-                    component="input"
-                    type={type}
-                    name={name}
-                    value={value}
-                    onChange={onChange}
-                    onBlur={onBlur}
-                    placeholder={placeholder}
-                    sx={{
-                        width: "100%",
+                            textTransform:
+                                "uppercase",
 
-                        border: "none",
-                        outline: "none",
+                            lineHeight: 1.4,
+                        }}
+                    >
+                        {label}
+                    </Typography>
+                )}
 
-                        borderBottom:
-                            "1px solid rgba(255,255,255,0.12)",
+                {multiline ? (
+                    <Box
+                        component="textarea"
 
-                        bgcolor: "transparent",
+                        name={name}
 
-                        color: "#fff",
+                        value={value}
 
-                        fontFamily:
-                            '"Roboto Mono", monospace',
+                        onChange={onChange}
 
-                        fontSize: {
-                            xs: "14px",
-                            md: "17px",
-                        },
+                        onFocus={() =>
+                            setIsFocused(
+                                true
+                            )
+                        }
 
-                        pb: 1.8,
+                        onBlur={
+                            handleBlur
+                        }
 
-                        "&::placeholder": {
-                            color:
-                                "rgba(255,255,255,0.52)",
+                        placeholder={
+                            isActive
+                                ? placeholder
+                                : label
+                        }
 
-                            opacity: 1,
-                        },
-                    }}
-                />
-            )}
+                        rows={3}
+
+                        sx={{
+                            display:
+                                "block",
+
+                            width: "100%",
+
+                            resize: "none",
+
+                            border: "none",
+
+                            outline:
+                                "none",
+
+                            bgcolor:
+                                "transparent",
+
+                            color: "#fff",
+
+                            px: {
+                                xs: 2,
+                                md: 2.2,
+                            },
+
+                            pt: {
+                                xs: 2,
+                                md: 2.1,
+                            },
+
+                            pb: {
+                                xs: 2,
+                                md: 2.1,
+                            },
+
+                            fontFamily:
+                                '"Roboto Mono", monospace',
+
+                            fontSize: {
+                                xs: "14px",
+                                md: "16px",
+                            },
+
+                            lineHeight:
+                                1.6,
+
+                            "&::placeholder":
+                            {
+                                color:
+                                    isActive
+                                        ? "rgba(255,255,255,0.45)"
+                                        : "#00A878",
+
+                                opacity: 1,
+
+                                textTransform:
+                                    isActive
+                                        ? "none"
+                                        : "uppercase",
+                            },
+                        }}
+                    />
+                ) : (
+                    <Box
+                        component="input"
+
+                        type={type}
+
+                        name={name}
+
+                        value={value}
+
+                        onChange={onChange}
+
+                        onFocus={() =>
+                            setIsFocused(
+                                true
+                            )
+                        }
+
+                        onBlur={
+                            handleBlur
+                        }
+
+                        placeholder={
+                            isActive
+                                ? placeholder
+                                : label
+                        }
+
+                        sx={{
+                            display:
+                                "block",
+
+                            width: "100%",
+
+                            border: "none",
+
+                            outline:
+                                "none",
+
+                            bgcolor:
+                                "transparent",
+
+                            color: "#fff",
+
+                            px: {
+                                xs: 2,
+                                md: 2.2,
+                            },
+
+                            py: {
+                                xs: 2,
+                                md: 2.1,
+                            },
+
+                            fontFamily:
+                                '"Roboto Mono", monospace',
+
+                            fontSize: {
+                                xs: "14px",
+                                md: "16px",
+                            },
+
+                            "&::placeholder":
+                            {
+                                color:
+                                    isActive
+                                        ? "rgba(255,255,255,0.45)"
+                                        : "#00A878",
+
+                                opacity: 1,
+
+                                textTransform:
+                                    isActive
+                                        ? "none"
+                                        : "uppercase",
+                            },
+                        }}
+                    />
+                )}
+            </Box>
 
             {error && (
                 <Typography
                     sx={{
-                        mt: 0.8,
-                        color: "#ff6b6b",
+                        mt: 0.7,
+
+                        ml: 1,
+
+                        color:
+                            "#ff6b6b",
+
                         fontFamily:
                             '"Roboto Mono", monospace',
-                        fontSize: "11px",
+
+                        fontSize:
+                            "11px",
                     }}
                 >
                     {error}
@@ -960,7 +1247,6 @@ const FormField = ({
         </Box>
     );
 };
-
 export default function ContactSection() {
     const formik = useFormik({
         initialValues: {
@@ -1145,8 +1431,8 @@ export default function ContactSection() {
                     },
 
                     top: {
-                        xs: "80px",
-                        md: "10px",
+                        xs: "90px",
+                        md: "20px",
                     },
 
                     background: `
@@ -1200,6 +1486,7 @@ export default function ContactSection() {
                         md: 10,
                         lg: 14,
                     },
+                    mt: 4,
 
                     alignItems:
                         "center",
@@ -1399,7 +1686,7 @@ export default function ContactSection() {
                                 </SocialIcon>
 
                                 <SocialIcon>
-                                    <TwitterIcon />
+                                    <XIcon />
                                 </SocialIcon>
 
                                 <SocialIcon>
@@ -1485,7 +1772,7 @@ export default function ContactSection() {
 
                         py: {
                             xs: 5,
-                            md: 6,
+                            md: 10,
                         },
 
                         willChange:
@@ -1525,12 +1812,12 @@ export default function ContactSection() {
                         <Stack
                             spacing={{
                                 xs: 4,
-                                md: 2.2,
+                                md: 4.5,
                             }}
                         >
                             <FormField
                                 label="FULL NAME"
-                                placeholder="e.g. Priya Loha"
+                                placeholder=""
                                 name="name"
                                 value={
                                     formik
@@ -1555,7 +1842,7 @@ export default function ContactSection() {
 
                             <FormField
                                 label="EMAIL ADDRESS"
-                                placeholder="e.g. Loha@example.com"
+                                placeholder=""
                                 type="email"
                                 name="email"
                                 value={
@@ -1581,7 +1868,7 @@ export default function ContactSection() {
 
                             <FormField
                                 label="PHONE NUMBER"
-                                placeholder="e.g. +91 8291 908 290"
+                                placeholder=""
                                 type="tel"
                                 name="phone"
                                 value={
@@ -1607,7 +1894,7 @@ export default function ContactSection() {
 
                             <FormField
                                 label="YOUR MESSAGE"
-                                placeholder="Describe your project, objectives, or questions..."
+                                placeholder=""
                                 multiline
                                 name="message"
                                 value={
@@ -1727,6 +2014,7 @@ export default function ContactSection() {
                         </Stack>
                     </Box>
                 </MotionBox>
+
             </Box>
         </Box>
     );
