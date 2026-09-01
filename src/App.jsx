@@ -7,7 +7,7 @@ import LegacyLeadershipPage from './LegacyLeadershipPage'
 import { Sustainability } from './Sustainability'
 import Story from './pages/Story/Story'
 import { HomePageLayout } from './layouts/HomePageLayout'
-import HomeV1 from './pages/Homev1'
+import HomeV1 from './pages/HomeV1'
 import SendQuerySection from './components/homepage/SendQuerySection'
 import PrivacyPolicyPage from './pages/PrivacyPolicyPage'
 
